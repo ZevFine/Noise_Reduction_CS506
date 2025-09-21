@@ -52,5 +52,5 @@ Testing comprises of:
 2. Testing \-   
    a. compare each image pixel by pixel its denoised counterpart.   
    b. Use existing image recognition models to see if main ideas are retained
-       i. We will run a clean image and get its classification, then run the denoised counterpart through it and get the similarity.
+   i. We will run a clean image and get its classification, then run the denoised counterpart through it and get the similarity.
 
