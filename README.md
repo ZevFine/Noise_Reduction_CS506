@@ -51,7 +51,6 @@ Testing comprises of:
 1. Partition \- Of each data set, set around 75% for training and the rest for testing   
 2. Testing \-   
    a. compare each image pixel by pixel its denoised counterpart.   
-   b. Use existing image recognition models to see if main ideas are retained 
-
-   i. We will run a clean image and get its classification, then run the denoised counterpart through it and get the similarity.
+   b. Use existing image recognition models to see if main ideas are retained
+       i. We will run a clean image and get its classification, then run the denoised counterpart through it and get the similarity.
 
