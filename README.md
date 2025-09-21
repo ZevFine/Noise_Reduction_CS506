@@ -1,4 +1,4 @@
-[cs506 project proposal.md](https://github.com/user-attachments/files/22454918/cs506.project.proposal.md)
+[cs506 project proposal.md](https://github.com/user-attachments/files/22454930/cs506.project.proposal.md)
 		
 
 CS 506 Project Proposal:  
@@ -51,6 +51,7 @@ Testing comprises of:
 1. Partition \- Of each data set, set around 75% for training and the rest for testing   
 2. Testing \-   
    a. compare each image pixel by pixel its denoised counterpart.   
-   b. Use existing image recognition models to see if main ideas are retained
+   b. Use existing image recognition models to see if main ideas are retained 
+
    i. We will run a clean image and get its classification, then run the denoised counterpart through it and get the similarity.
 
