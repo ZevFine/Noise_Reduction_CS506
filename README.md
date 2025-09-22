@@ -4,7 +4,7 @@
 CS 506 Project Proposal:  
 Noise Reduction in Images
 
-By: Ashtosh Bhandari, Zev Fine
+By: Ashtosh Bhandari, Zev Fine, Varada Rohokale
 
 Description  
 The aim of this project is to develop algorithms and deep learning models that can take noisy, fuzzy, blurred, or low-quality images and transform them into clearer, more understandable versions. This process involves applying deep learning techniques, and reverse engineering gaussian and brownian noise to try to correct the blurring effects. The goal is to restore and preserve the original content as much as possible.
