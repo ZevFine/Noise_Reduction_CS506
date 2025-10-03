@@ -1,10 +1,9 @@
-[cs506 project proposal.md](https://github.com/user-attachments/files/22454930/cs506.project.proposal.md)
 		
 
 CS 506 Project Proposal:  
 Noise Reduction in Images
 
-By: Ashtosh Bhandari, Zev Fine, Varada Rohokale
+By: Ashtosh Bhandari, Zev Fine
 
 Description  
 The aim of this project is to develop algorithms and deep learning models that can take noisy, fuzzy, blurred, or low-quality images and transform them into clearer, more understandable versions. This process involves applying deep learning techniques, and reverse engineering gaussian and brownian noise to try to correct the blurring effects. The goal is to restore and preserve the original content as much as possible.
@@ -24,6 +23,7 @@ There are two types of data to be collected:
    4. [https://www.kaggle.com/datasets/vishalsubbiah/pokemon-images-and-types](https://www.kaggle.com/datasets/vishalsubbiah/pokemon-images-and-types)  
    5. etc  
 2. Photos taken by us  
+3. We will artificially add noise, by using gaussing noise, bowninan noise, etc.   
    
 
 Modeling Data  
@@ -41,8 +41,13 @@ Data visualization
 To evaluate and present results, we will show
 
 1. Side by side comparison \- an easy way to show how good or bad our methods are is by showing before, after, and target  
-2. Over all data \- show the mean, median, mode etc error between our overage targets and show RGB Differences in before and after  
-3. Give specific examples \- show where the reduction worked well or poorly (faces, background, building, etc)  
+2. Other ways of showing quality   
+   1. SSIM  
+   2. PSNR  
+   3. Entropy / Noise Variance  
+3. Over all data \- show the mean, median, mode etc error between our overage targets and show RGB Differences in before and after  
+4. Give specific examples \- show where the reduction worked well or poorly (faces, background, building, etc)  
+5.   
      
    Test Plan
 
@@ -54,4 +59,3 @@ Testing comprises of:
    b. Use existing image recognition models to see if main ideas are retained 
 
    i. We will run a clean image and get its classification, then run the denoised counterpart through it and get the similarity.
-
