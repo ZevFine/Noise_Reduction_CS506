@@ -1,26 +1,25 @@
 #!/usr/bin/env python3
 """
-COMPREHENSIVE DENOISING COMPARISON SCRIPT (PATCHED & FIXED)
+COMPREHENSIVE DENOISING COMPARISON SCRIPT
 ==========================================================
-This version fixes:
- - SSIM compatibility wrapper
- - Safer Poisson sampling (HDR-aware)
- - NL-means args compatibility
- - Practical epsilon for log transform
- - Entropy clipping to avoid uint8 wrap
- - Added TV denoise in method list
- - Saves error maps
- - Reintroduced create_aggregate_visualization (was missing)
- - Fixed __main__ so running `python denoise.py <path>` works
- 
-ADDITIONAL FIXES (v2):
- - Fixed frequency domain division by zero (sigma minimum)
- - Added both Anscombe inverse variants (naive -3/8 and exact -1/8)
- - Fixed visualization division by zero
- - Added NaN/Inf handling in correlation computation
- - Increased epsilon for log transform stability
- - Fixed inconsistent return values in process_folder
- - Removed dead wavelet code (not implemented)
+Tests 4 noise types × 4 denoising methods = 16 combinations
+
+HYPOTHESIS TESTING:
+i.   Gaussian Noise → Frequency Domain (FFT) is best
+ii.  Poisson Noise → Anscombe Transform is best  
+iii. Salt & Pepper Noise → Clustering/Median is best
+iv.  Speckle Noise → Log Transform + Gaussian is best
+
+How to use:
+    python denoise.py                           # runs on built-in sample 'camera'
+    python denoise.py path/to/your_image.jpg   # process single image
+    python denoise.py path/to/image/folder/    # process all images in folder
+
+Dependencies:
+    numpy, matplotlib, scikit-image, scipy, pandas, pywavelets
+    pip install numpy matplotlib scikit-image scipy pandas PyWavelets
+
+
 """
 import sys
 import os
