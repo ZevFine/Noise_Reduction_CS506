@@ -41,7 +41,7 @@ def debug_photo_conversion():
         
         # Try absolute path as fallback
         print(f"\n🔄 Trying absolute path fallback...")
-        absolute_path = "/Users/zevfine/Desktop/Noise_Reduction_CS506/Photos_Subset"
+        absolute_path = "./Noise_Reduction_CS506/Photos_Subset"
         if os.path.exists(absolute_path):
             print(f"✅ Found directory at absolute path: {absolute_path}")
             photos_subset_path = absolute_path
