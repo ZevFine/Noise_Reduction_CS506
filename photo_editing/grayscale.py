@@ -26,7 +26,7 @@ def debug_photo_conversion():
     
     # Check if directory exists
     if not os.path.exists(photos_subset_path):
-        print(f"❌ ERROR: Directory '{photos_subset_path}' does not exist!")
+        print(f" ERROR: Directory '{photos_subset_path}' does not exist!")
         print("\nLet's see what's actually in the parent directory:")
         parent_contents = os.listdir(parent_dir)
         if not parent_contents:
@@ -40,16 +40,16 @@ def debug_photo_conversion():
                     print(f"   📄 {item}")
         
         # Try absolute path as fallback
-        print(f"\n🔄 Trying absolute path fallback...")
+        print(f"\n Trying absolute path fallback...")
         absolute_path = "./Noise_Reduction_CS506/Photos_Subset"
         if os.path.exists(absolute_path):
-            print(f"✅ Found directory at absolute path: {absolute_path}")
+            print(f"Found directory at absolute path: {absolute_path}")
             photos_subset_path = absolute_path
         else:
-            print(f"❌ Absolute path also not found: {absolute_path}")
+            print(f"Absolute path also not found: {absolute_path}")
             return
     else:
-        print(f"✅ Photos_Subset directory exists!")
+        print(f" Photos_Subset directory exists!")
     
     print(f"\n4. Scanning Photos_Subset directory...")
     
@@ -84,11 +84,11 @@ def debug_photo_conversion():
                 print(f"      - {other_file}")
                 
     except Exception as e:
-        print(f"❌ Error reading directory: {e}")
+        print(f"Error reading directory: {e}")
         return
     
     if not image_files:
-        print("❌ No image files found to process!")
+        print("No image files found to process!")
         return
     
     print(f"\n5. Starting black and white conversion...")
@@ -97,25 +97,25 @@ def debug_photo_conversion():
     # Process each image with detailed feedback
     success_count = 0
     for filename in tqdm(image_files, desc="Converting images"):
-        print(f"\n   🔄 Processing: {filename}")
+        print(f"\n   Processing: {filename}")
         try:
             input_path = os.path.join(photos_subset_path, filename)
             
             # Check if file exists and is readable
             if not os.path.exists(input_path):
-                print(f"      ❌ File not found: {input_path}")
+                print(f"       File not found: {input_path}")
                 continue
                 
             if not os.access(input_path, os.R_OK):
-                print(f"      ❌ File not readable: {filename}")
+                print(f"      File not readable: {filename}")
                 continue
             
             # Read the image
             img = cv2.imread(input_path)
             
             if img is not None:
-                print(f"      ✅ Successfully read image")
-                print(f"      📏 Image dimensions: {img.shape}")
+                print(f"       Successfully read image")
+                print(f"       Image dimensions: {img.shape}")
                 
                 # Convert to grayscale
                 bw_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -128,29 +128,29 @@ def debug_photo_conversion():
                 
                 # Check if output file already exists
                 if os.path.exists(output_path):
-                    print(f"      ⚠️  Output file already exists, overwriting: {output_filename}")
+                    print(f"        Output file already exists, overwriting: {output_filename}")
                 
                 # Save the black and white version
                 success = cv2.imwrite(output_path, bw_img_bgr)
                 if success:
-                    print(f"      ✅ Successfully saved: {output_filename}")
+                    print(f"       Successfully saved: {output_filename}")
                     success_count += 1
                     
                     # Verify the file was created
                     if os.path.exists(output_path):
                         file_size = os.path.getsize(output_path)
-                        print(f"      📦 File created, size: {file_size} bytes")
+                        print(f"       File created, size: {file_size} bytes")
                     else:
-                        print(f"      ❌ File not found after saving: {output_filename}")
+                        print(f"       File not found after saving: {output_filename}")
                 else:
-                    print(f"      ❌ FAILED to save: {output_filename}")
+                    print(f"       FAILED to save: {output_filename}")
                 
             else:
-                print(f"      ❌ Could not read image data from: {filename}")
-                print(f"      💡 Try opening this file manually with an image viewer")
+                print(f"       Could not read image data from: {filename}")
+                print(f"       Try opening this file manually with an image viewer")
                 
         except Exception as e:
-            print(f"      ❌ Error processing {filename}: {str(e)}")
+            print(f"       Error processing {filename}: {str(e)}")
     
     print(f"\n6. CONVERSION SUMMARY")
     print("=" * 50)
@@ -177,7 +177,7 @@ def debug_photo_conversion():
                 file_size = os.path.getsize(file_path)
                 print(f"      - {bw_file} ({file_size} bytes)")
         else:
-            print(f"\n   ❌ No black and white files were created!")
+            print(f"\n    No black and white files were created!")
             
     except Exception as e:
         print(f"   Error reading final directory: {e}")
