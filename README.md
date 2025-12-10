@@ -1,10 +1,49 @@
-### CS506:Noise Reduction Final Report***
-# By: Ashtosh Bhandari, Varada Rohokale, Zev Fine**
+### CS506:Noise Reduction Final Report 
+# By: Ashtosh Bhandari, Varada Rohokale, Zev Fine
 # Youtube Link: 
 
 ---
 
 # Index
+
+- [Section 1: Introduction](#section-1-introduction)
+
+- [Section 2: Pre-Noise Metrics](#section-2-pre-noise-metrics)
+  - [2.1 Approach and Methodology](#21-approach-and-methodology)
+  - [2.2 Quantitative Metrics Analysis](#22-quantitative-metrics-analysis)
+
+- [Section 3: Salt & Pepper Noise Generation](#section-3-salt--pepper-noise-generation)
+  - [3.1 Approach and Methodology](#31-approach-and-methodology)
+  - [3.2 Quantitative Metrics Analysis](#32-quantitative-metrics-analysis)
+  - [3.3 Denoising Goals](#33-denoising-goals)
+
+- [Section 4: Salt & Pepper Denoising – K-Medoids Clustering](#section-4-salt--pepper-denoising--k-medoids-clustering)
+  - [4.1 Denoising Methodology](#41-denoising-methodology)
+    - [4.1.1 Algorithm Selection and Rationale](#411-algorithm-selection-and-rationale)
+    - [4.1.2 Implementation](#412-implementation)
+    - [4.1.3 Parameter Configurations](#413-parameter-configurations)
+  - [4.2 Results Analysis](#42-results-analysis)
+    - [4.2.1 Visual Comparison of All Parameters](#421-visual-comparison-of-all-parameters)
+    - [4.2.2 Heat Map Analysis – Metric Comparison](#422-heat-map-analysis--metric-comparison)
+  - [4.3 Other Examples](#43-other-examples)
+  - [4.4 Method Limitations and Trade-offs](#44-method-limitations-and-trade-offs)
+
+- [Section 5: Speckle Noise Generation](#section-5-speckle-noise-generation)
+  - [5.1 Approach and Methodology](#51-approach-and-methodology)
+  - [5.2 Quantitative Metrics Analysis](#52-quantitative-metrics-analysis)
+  - [5.3 Denoising Goals](#53-denoising-goals)
+
+- [Section 6: Speckle Denoising – Log-Domain Non-Local Means](#section-6-speckle-denoising--log-domain-non-local-means)
+  - [6.1 Denoising Methodology](#61-denoising-methodology)
+    - [6.1.1 Algorithm Selection and Rationale](#611-algorithm-selection-and-rationale)
+    - [6.1.2 Implementation](#612-implementation)
+    - [6.1.3 Parameter Configurations](#613-parameter-configurations)
+  - [6.2 Results Analysis](#62-results-analysis)
+    - [6.2.1 Visual Comparison of All Parameters](#621-visual-comparison-of-all-parameters)
+    - [6.2.2 Heat Map Analysis – Metric Comparison](#622-heat-map-analysis--metric-comparison)
+  - [6.3 Other Examples](#63-other-examples)
+  - [6.4 Method Limitations and Trade-offs](#64-method-limitations-and-trade-offs)
+
 
 ---
 
@@ -30,44 +69,44 @@ All original color and grayscale images were evaluated using the full set of ima
 ### Color Images
 
 **Brightness**  
-The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
+- The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
 
 **Contrast**  
-The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
+- The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
 
 **Entropy**  
-Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
+- Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
 
 **Sharpness**  
-There is a lot of low sharpness, this is because the images we used have pretty low resolution.
+- There is a lot of low sharpness, this is because the images we used have pretty low resolution.
 
 **Spatial Frequency**  
-Like Sharpness this implies that there are a lot of blurry/low resolution images.
+- Like Sharpness this implies that there are a lot of blurry/low resolution images.
 
 **Dynamic Range**  
-Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
+- Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
 
 ---
 
 ### Black and White Images
 
 **Brightness**  
-This has more or less the same distribution as color.
+- This has more or less the same distribution as color.
 
 **Contrast**  
-The contrast is more right skewed than the color, this is because of the lack of color.
+- The contrast is more right skewed than the color, this is because of the lack of color.
 
 **Entropy**  
-This is more or less the same distribution as color.
+- This is more or less the same distribution as color.
 
 **Sharpness**  
-This is more or less the same distribution as color.
+- This is more or less the same distribution as color.
 
 **Spatial Frequency**  
-This is more or less the same distribution as color.
+- This is more or less the same distribution as color.
 
 **Dynamic Range**  
-This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
+- This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
 
 ---
 
