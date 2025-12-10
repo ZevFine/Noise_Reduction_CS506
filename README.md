@@ -92,7 +92,10 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 ## 3.2 Quantitative Metrics Analysis
 
 <img width="640" height="428" alt="sp_nosed_image" src="https://github.com/user-attachments/assets/b2e43dfe-f232-46cd-b58c-e93d185dda14" />
+
 **Noised Image: amount_0.20**
+
+<img width="640" height="724" alt="sp_bw_histogram" src="https://github.com/user-attachments/assets/011ea3a2-7d72-41c0-8a58-9b79faf1d6da" />
 
 **Noised Image Metric Histogram:amount_0.20**
 
@@ -220,6 +223,8 @@ The pre-filtered image was clustered using K-medoids with multiple cluster count
 
 ## 4.2.1 Visual Comparison of All Parameters
 
+<img width="900" height="328" alt="all_param _visual_sp " src="https://github.com/user-attachments/assets/6fecd256-ff1d-471c-9742-3f392d7055fb" />
+
 ### Without Median Pre-filtering
 - **kmedoids_k3_no_prefilter (PSNR: 8.17 dB)**
   - Complete failure
@@ -263,7 +268,9 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 
 - **Deep green (1.0):** Optimal performance  
 - **Yellow (0.5):** Moderate performance  
-- **Red (0.0):** Poor performance  
+- **Red (0.0):** Poor performance
+
+<img width="800" height="610" alt="heat_map_sp" src="https://github.com/user-attachments/assets/af87a3aa-a734-4ea3-810d-eb052b69bafa" />
 
 #### Non-prefiltered Methods
 - **PSNR and SSIM**
@@ -302,6 +309,16 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
   - Dynamic_Range (0.75)
 - **Trade-off Observed:**
   - Slight entropy increase in exchange for superior noise removal
+ 
+<img width="900" height="261" alt="best_comparison (35)_sp" src="https://github.com/user-attachments/assets/3518e043-870d-4e82-a1a0-bdab4030b4bf" />
+
+---
+
+## 4.3 Other Examples
+
+<img width="900" height="314" alt="best_comparison_Sports_2_116" src="https://github.com/user-attachments/assets/4d56795e-2017-4961-8e27-ab54e35f0d21" />
+
+<img width="900" height="267" alt="best_comparison_BSDS300_6_188005 (1)" src="https://github.com/user-attachments/assets/a3cd1041-0561-4aa3-825f-cc3115149c22" />
 
 ---
 
@@ -369,7 +386,11 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 
 ## 5.2 Quantitative Metrics Analysis
 
+<img width="640" height="427" alt="speckle_noised_image" src="https://github.com/user-attachments/assets/16f7bf83-8cf9-4df1-843c-b2378edd0951" />
+
 **Noised Image: intensity_3.0**
+
+<img width="640" height="725" alt="speckle_bw_histogram" src="https://github.com/user-attachments/assets/11fdcf6b-03c2-4343-b724-8a822db05c05" />
 
 ### Noised Image Metric Histogram: intensity_3.0
 
@@ -499,6 +520,8 @@ After filtering, the image is mapped back to the original intensity domain using
 
 ### 6.2.1 Visual Comparison of All Parameters
 
+![all_param_visual_speckle](https://github.com/user-attachments/assets/56360b51-b768-421d-ae21-1f59ed2f5053)
+
 ### Low Filter Strength
 - **nlm_h14_t7_s21 (PSNR: 13.11 dB)**
   - Minimal improvement
@@ -529,6 +552,14 @@ After filtering, the image is mapped back to the original intensity domain using
 
 ### 6.2.2 Heat Map Analysis – Metric Comparison
 
+The heat map visualizes normalized performance metrics on a 0–1 scale, where:
+
+- **Deep green (1.0):** Optimal performance  
+- **Yellow (0.5):** Moderate performance  
+- **Red (0.0):** Poor performance  
+
+<img width="800" height="613" alt="heatmap_speckle" src="https://github.com/user-attachments/assets/74ea20ac-0122-4ab3-9acb-a78000a34f72" />
+
 **PSNR Column:** Progressive greening from h14 → h23  
 **SSIM Column:** Wide variation; higher h reduces structural fidelity  
 **MSE Column:** Consistently red across all parameters  
@@ -546,7 +577,9 @@ Trade-offs visible: Slight entropy increase for superior noise removal
 
 ## 6.3 Other Examples
 
-(See additional visual best-result comparisons for intensity_1.0 and intensity_2.0.)
+<img width="900" height="267" alt="best_comparison_BSDS300_18_117054" src="https://github.com/user-attachments/assets/d351184f-ad5c-4101-a7ce-018b7914e7f0" />
+
+<img width="900" height="314" alt="best_comparison_Sports_19_049" src="https://github.com/user-attachments/assets/c1033a5d-f54c-4af0-b490-4eecae59cd34" />
 
 ---
 
