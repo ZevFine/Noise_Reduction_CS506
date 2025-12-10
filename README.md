@@ -643,3 +643,173 @@ Trade-offs visible: Slight entropy increase for superior noise removal
    - **Limitation:** Beyond \(h = 20\), stronger smoothing yields marginal PSNR gains but worse perceptual quality.  
    - **Evidence:** h23 gives only ~0.24 dB higher PSNR but noticeably lower sharpness (10,527 vs. 13,251).  
    - **Conclusion:** Log-domain NLM approaches a performance ceiling at extreme speckle levels.
+
+---
+
+## Section 7: Gaussian Noise Generation
+
+### 7.1 Approach and Methodology
+
+Gaussian noise is a form of statistical noise where pixel intensity values are modified based on a normal (Gaussian) distribution. This type of noise mimics real-world sensor disturbances caused by thermal fluctuations, low-light conditions, and electronic interference. Unlike impulse noise, Gaussian noise affects every pixel with small random variations, resulting in a grainy appearance without structured corruption. Because the noise follows a probability distribution, most deviations remain small while extreme distortions occur less frequently.
+
+Multiple Gaussian distributions were tested using a variety of mean (μ) and standard deviation (σ) combinations to evaluate how both brightness bias and intensity variation affect image degradation.
+
+#### Parameters
+
+| Distribution Type | Sigma (σ) Values | Mu (μ) Values | Description |
+|-------------------|------------------|---------------|-------------|
+| N(μ, σ) | 25, 50, 100, 150 | Positive | Brightness-biased noise |
+| N(μ, σ) | 25, 50, 100, 150 | Negative | Darkening-biased noise |
+| N(μ, σ) | 25, 50, 100, 150 | Equal | Zero-centered noise |
+
+---
+
+### 7.2 Quantitative Metrics Analysis
+
+#### Noised Image: X ~ N(0, 100)
+
+**PSNR**  
+- The PSNR is relatively low, which is expected given the large variance in noise added to the image.
+
+**SSIM**  
+- The SSIM follows a roughly normal distribution, reflecting consistent structural preservation across varied image content.
+
+**MSE**  
+- The Mean Squared Error is very high, which aligns with the large magnitude of noise applied.
+
+**Entropy Difference**  
+- A bimodal distribution is observed because some images originally had high entropy while others had very low complexity.
+
+**Noise Variance**  
+- The noise variance is extremely high due to the aggressive noise injection.
+
+**Sharpness**  
+- The sharpness remains high, indicating that despite heavy noise, textural details are still present.
+
+**Spatial Frequency**  
+- Higher than denoised images, because noise introduces artificial high-frequency components.
+
+**Dynamic Range**  
+- Remains high due to the full contrast span still being preserved.
+
+---
+
+#### Noised Image: X ~ N(-10, 50) — Black & White
+
+**PSNR**  
+- Very low, consistent with strong Gaussian interference.
+
+**SSIM**  
+- Extremely low due to chromatic distortion from noise affecting grayscale reconstruction.
+
+**MSE**  
+- Very high, reflecting heavy deviations from the original image.
+
+**Entropy Difference**  
+- Again bimodal due to variation in original image complexity.
+
+**Noise Variance**  
+- High variance confirms aggressive noise magnitude.
+
+**Sharpness**  
+- Moderately high due to preserved high-frequency artifacts.
+
+**Spatial Frequency**  
+- Comparable to some denoised color cases due to grayscale texture consistency.
+
+**Dynamic Range**  
+- Preserved due to maintained contrast extremes.
+
+---
+
+## Section 8: Gaussian Noise Reduction – Fourier Transform
+
+### 8.1 Denoising Methodology
+
+#### 8.1.1 Algorithm Selection and Rationale
+
+Gaussian noise spreads across all spatial frequencies but is most destructive in high-frequency regions. By transforming images into the frequency domain using the Fourier Transform, noise-dominant frequencies become separable from meaningful image content. A low-pass or Gaussian frequency filter can then attenuate noise while retaining low-frequency structure. This enables effective denoising while avoiding excessive spatial-domain blur.
+
+The inverse Fourier Transform reconstructs the image with suppressed noise while preserving dominant structures.
+
+---
+
+#### 8.1.2 Implementation – Low-Pass Filter Method
+
+Each image is transformed from the spatial domain into the frequency domain using the Discrete Fourier Transform. In this representation, pixel intensities are expressed as combinations of sinusoidal frequency components. High-frequency components correspond to fine detail and noise.
+
+A frequency cutoff threshold is selected, and components exceeding this cutoff are suppressed. The filtered frequency representation is then transformed back into the spatial domain using the inverse transform, producing the denoised image.
+
+##### Cutoff Selection
+
+Multiple cutoffs were evaluated:
+
+- **Too low:** Excessive blurring and major detail loss  
+- **Too high:** Almost no noise removal  
+- **Optimal range:** 60–70 preserved structure while effectively reducing noise
+
+This balance achieved the best trade-off between smoothness and detail preservation.
+
+---
+
+### 8.1.3 Parameter Configurations
+
+| Distribution | Sigma (σ) | Mu (μ) | Description |
+|--------------|------------|------------|-------------|
+| N(μ, σ) | 25, 50, 100, 150 | Positive | Bright-biased denoising |
+| N(μ, σ) | 25, 50, 100, 150 | Negative | Dark-biased denoising |
+| N(μ, σ) | 25, 50, 100, 150 | Neutral | Zero-centered distribution |
+
+---
+
+## 8.2 Results Analysis
+
+### 8.2.1 Visual Comparison of All Parameters
+
+| Parameter | Description (Noised) | Description (Denoised) |
+|-----------|----------------------|--------------------------|
+| N(0, 25) | Light but visible noise | Flattened noise, minor detail loss |
+| Color N(0, 100) | Heavy noise, clearly visible | Flatter noise with moderate detail loss |
+| N(10, 150) | Extreme visual distortion | Noise flattened, edges more visible |
+| Color N(10, 25) | Light noise, skin distortion | Smoother texture, de-aging effect |
+| N(-10, 50) | Moderate noise escalation | Very blurred, silhouettes preserved |
+| Color N(-10, 25) | Very noticeable noise | Flatter noise, improved appearance |
+
+---
+
+### 8.2.2 Histogram Analysis – Metric Comparison
+
+**PSNR**  
+- Mean value of 24.25 indicates noticeable noise but moderate similarity to the original image.
+
+**SSIM**  
+- Wide variation due to diverse image structure; spike likely caused by black-background images gaining artificial texture.
+
+**MSE**  
+- Bimodal distribution suggests some images recover well while others remain distorted.
+
+**Entropy Difference**  
+- Low values imply flattened noise reduces randomness dispersion.
+
+**Noise Variance**  
+- Near-normal distribution reflects controlled suppression.
+
+**Sharpness**  
+- Relatively low due to strong low-pass filtering.
+
+**Spatial Frequency**  
+- Low because both noise and blur suppress fine detail.
+
+**Dynamic Range**  
+- Remains high, preserving contrast.
+
+**Best Parameter:**  
+- Determined by the optimal balance between PSNR, SSIM, and retained visual fidelity at a cutoff near 65.
+
+---
+
+## 8.3 Other Examples
+
+
+---
+
