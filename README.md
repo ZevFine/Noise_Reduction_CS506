@@ -91,6 +91,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 
 ## 3.2 Quantitative Metrics Analysis
 
+<img width="1056" height="706" alt="sp_nosed_image" src="https://github.com/user-attachments/assets/b2e43dfe-f232-46cd-b58c-e93d185dda14" />
 **Noised Image: amount_0.20**
 
 **Noised Image Metric Histogram:amount_0.20**
