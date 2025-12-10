@@ -804,7 +804,6 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 <img width="800" height="1333" alt="6A00FAD6-511B-426B-BE4E-146EEEC38CC3" src="https://github.com/user-attachments/assets/30e567f8-a40b-487d-9689-8cce73a79bc1" />
 
-
 **PSNR**  
 - Mean value of 24.25 indicates noticeable noise but moderate similarity to the original image.
 
@@ -847,7 +846,7 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 <img width="800" height="204" alt="20BF09EF-380B-4A1A-BD9F-948D09A03625" src="https://github.com/user-attachments/assets/02271dbc-de58-46ab-8953-2f872760ea1c" />
 
-## 8.3 Limitations and Trade offs
+## 8.4 Limitations and Trade offs
 
 1. **Loss of Fine Detail Due to Global Filtering**  
    Fourier-based low-pass filtering suppresses high-frequency noise, but it also removes legitimate high-frequency image details such as edges, textures, and small structures. This causes a flattening effect in the image, where sharpness is reduced along with the noise.
