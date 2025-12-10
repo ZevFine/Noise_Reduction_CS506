@@ -1,6 +1,6 @@
-***CS506:Noise Reduction Final Report***
-**By: Ashtosh Bhandari, Varada Rohokale, Zev Fine**
-*Youtube Link:*
+# CS506:Noise Reduction Final Report
+## By: Ashtosh Bhandari, Varada Rohokale, Zev Fine
+### Youtube Link:
 
 ---
 
@@ -30,44 +30,44 @@ All original color and grayscale images were evaluated using the full set of ima
 ### Color Images
 
 **Brightness**  
-The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
+- The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
 
 **Contrast**  
-The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
+- The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
 
 **Entropy**  
-Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
+- Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
 
 **Sharpness**  
-There is a lot of low sharpness, this is because the images we used have pretty low resolution.
+- There is a lot of low sharpness, this is because the images we used have pretty low resolution.
 
 **Spatial Frequency**  
-Like Sharpness this implies that there are a lot of blurry/low resolution images.
+- Like Sharpness this implies that there are a lot of blurry/low resolution images.
 
 **Dynamic Range**  
-Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
+- Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
 
 ---
 
 ### Black and White Images
 
 **Brightness**  
-This has more or less the same distribution as color.
+- This has more or less the same distribution as color.
 
 **Contrast**  
-The contrast is more right skewed than the color, this is because of the lack of color.
+- The contrast is more right skewed than the color, this is because of the lack of color.
 
 **Entropy**  
-This is more or less the same distribution as color.
+- This is more or less the same distribution as color.
 
 **Sharpness**  
-This is more or less the same distribution as color.
+- This is more or less the same distribution as color.
 
 **Spatial Frequency**  
-This is more or less the same distribution as color.
+- This is more or less the same distribution as color.
 
 **Dynamic Range**  
-This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
+- This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
 
 ---
 
@@ -91,15 +91,11 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 
 ## 3.2 Quantitative Metrics Analysis
 
-<img width="640" height="428" alt="sp_nosed_image" src="https://github.com/user-attachments/assets/b2e43dfe-f232-46cd-b58c-e93d185dda14" />
-
 **Noised Image: amount_0.20**
-
-<img width="640" height="724" alt="sp_bw_histogram" src="https://github.com/user-attachments/assets/011ea3a2-7d72-41c0-8a58-9b79faf1d6da" />
 
 **Noised Image Metric Histogram:amount_0.20**
 
-### PSNR Distribution
+#### PSNR Distribution
 - **Mean:** 7.85 dB  
 - **Median:** 7.44 dB  
 - **Interpretation:**
@@ -108,7 +104,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - Very tight distribution indicates consistent severe degradation
   - Values below 10 dB indicate poor signal quality
 
-### SSIM Distribution
+#### SSIM Distribution
 - **Mean:** 0.06  
 - **Median:** 0.06  
 - **Interpretation:**
@@ -117,7 +113,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - Nearly uniform distribution showing complete loss of structural similarity
   - Values approaching 0 indicate minimal resemblance to original
 
-### MSE Distribution
+#### MSE Distribution
 - **Mean:** 10,786.65  
 - **Median:** 11,716.68  
 - **Interpretation:**
@@ -125,7 +121,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - Bimodal distribution suggests varying error patterns
   - Extremely high error values confirm substantial pixel-level differences
 
-### Entropy Difference
+#### Entropy Difference
 - **Mean:** 1.02  
 - **Median:** 0.61  
 - **Interpretation:**
@@ -133,7 +129,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - Wide distribution (0 to 2.0) shows variable impact
   - Higher entropy differences indicate loss of original information structure
 
-### Noise Variance
+#### Noise Variance
 - **Mean:** 10,090.28  
 - **Median:** 10,276.23  
 - **Interpretation:**
@@ -141,7 +137,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - Broader distribution indicates less predictable noise impact
   - High variance confirms substantial signal corruption
 
-### Sharpness
+#### Sharpness
 - **Mean:** 184,070.10  
 - **Median:** 193,454.91  
 - **Interpretation:**
@@ -149,7 +145,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - High values reflect noise artifacts rather than true detail
   - Distribution shows noise dominates edge detection
 
-### Spatial Frequency
+#### Spatial Frequency
 - **Mean:** 191.87  
 - **Median:** 197.32  
 - **Interpretation:**
@@ -157,7 +153,7 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
   - High spatial frequency reflects dominant noise patterns
   - Original spatial structure masked
 
-### Dynamic Range
+#### Dynamic Range
 - **Value:** 255.00  
 - **Interpretation:**
   - Preserved regardless of noise level
@@ -167,21 +163,36 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 
 ## 3.3 Denoising Goals
 
-For Severe Noise (amount_0.20):
+Based on the quantitative characterization of severe salt and pepper noise (amount_0.20), the following restoration targets were established to guide denoising performance evaluation:
 
-**PSNR:** Achieve 15–20 dB (recovery from 7.85 dB)  
-Goal: 2–3x improvement  
-Rationale: Above 15 dB makes content recognizable  
+- **PSNR Target: 15–20 dB (Recovery from 7.85 dB)**
+  - **Goal:**
+    - Achieve a 2–3× improvement over the degraded input
+  - **Rationale:**
+    - PSNR values above 15 dB correspond to images where content becomes visually recognizable
+    - Full recovery is unrealistic due to irreversible impulse corruption
 
-**SSIM:** Achieve 0.40–0.60 (recovery from 0.06)  
-Goal: Restore basic structural information  
+- **SSIM Target: 0.40–0.60 (Recovery from 0.06)**
+  - **Goal:**
+    - Restore basic structural similarity and object shapes
+  - **Rationale:**
+    - An 89% structural similarity loss makes full recovery infeasible
+    - Values above 0.4 indicate partial restoration of spatial structure
 
-**MSE:** Reduce to 3,000–5,000 (from 10,786.65)  
-Goal: 50–70% reduction  
+- **MSE Target: 3,000–5,000 (From 10,786.65)**
+  - **Goal:**
+    - Achieve a 50–70% reduction in pixel-level error
+  - **Rationale:**
+    - High initial MSE reflects catastrophic pixel corruption
+    - Partial error reduction is considered successful at this noise level
 
-**Entropy Difference:** Reduce to 0.20–0.40 (from 1.02)  
-Goal: Restore information structure and balance denoising with detail preservation  
-
+- **Entropy Difference Target: 0.20–0.40 (From 1.02)**
+  - **Goal:**
+    - Restore the original information structure without excessive smoothing
+  - **Rationale:**
+    - Large entropy shifts indicate loss of natural image complexity
+    - Over-smoothing risks entropy collapse and loss of texture
+ 
 ---
 
 # Section 4: Salt & Pepper Denoising – K-Medoids Clustering Technique
@@ -221,11 +232,9 @@ The pre-filtered image was clustered using K-medoids with multiple cluster count
 
 ## 4.2 Results Analysis
 
-## 4.2.1 Visual Comparison of All Parameters
+### 4.2.1 Visual Comparison of All Parameters
 
-<img width="900" height="328" alt="all_param _visual_sp " src="https://github.com/user-attachments/assets/6fecd256-ff1d-471c-9742-3f392d7055fb" />
-
-### Without Median Pre-filtering
+#### Without Median Pre-filtering
 - **kmedoids_k3_no_prefilter (PSNR: 8.17 dB)**
   - Complete failure
   - Image remains nearly as noisy as input
@@ -239,7 +248,7 @@ The pre-filtered image was clustered using K-medoids with multiple cluster count
   - Negligible difference from k5
   - All non-prefiltered methods fail
 
-### With Median Pre-filtering
+#### With Median Pre-filtering
 - **kmedoids_k3_median (PSNR: 20.87 dB)**
   - Dramatic improvement
   - Image content clearly visible
@@ -268,9 +277,7 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 
 - **Deep green (1.0):** Optimal performance  
 - **Yellow (0.5):** Moderate performance  
-- **Red (0.0):** Poor performance
-
-<img width="800" height="610" alt="heat_map_sp" src="https://github.com/user-attachments/assets/af87a3aa-a734-4ea3-810d-eb052b69bafa" />
+- **Red (0.0):** Poor performance  
 
 #### Non-prefiltered Methods
 - **PSNR and SSIM**
@@ -309,22 +316,12 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
   - Dynamic_Range (0.75)
 - **Trade-off Observed:**
   - Slight entropy increase in exchange for superior noise removal
- 
-<img width="900" height="261" alt="best_comparison (35)_sp" src="https://github.com/user-attachments/assets/3518e043-870d-4e82-a1a0-bdab4030b4bf" />
-
----
-
-## 4.3 Other Examples
-
-<img width="900" height="314" alt="best_comparison_Sports_2_116" src="https://github.com/user-attachments/assets/4d56795e-2017-4961-8e27-ab54e35f0d21" />
-
-<img width="900" height="267" alt="best_comparison_BSDS300_6_188005 (1)" src="https://github.com/user-attachments/assets/a3cd1041-0561-4aa3-825f-cc3115149c22" />
 
 ---
 
 ## 4.4 Method Limitations and Trade-offs
 
-### 1. Entropy Distortion
+#### 1. Entropy Distortion
 - **Limitation:**
   - K-medoids reduces continuous intensity space into discrete clusters
 - **Evidence:**
@@ -334,7 +331,7 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 - **Mitigation Needed:**
   - Post-processing smoothing or dithering
 
-### 2. Dynamic Range Compression
+#### 2. Dynamic Range Compression
 - **Limitation:**
   - Clustering compresses intensity distribution toward cluster centers
 - **Evidence:**
@@ -344,7 +341,7 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 - **Mitigation Needed:**
   - Histogram equalization as post-processing
 
-### 3. Detail Loss in Smooth Regions
+#### 3. Detail Loss in Smooth Regions
 - **Limitation:**
   - Median pre-filter inherently smooths fine textures
 - **Evidence:**
@@ -354,7 +351,7 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 - **Trade-off:**
   - Necessary compromise for effective impulse noise removal
 
-### 4. Performance Degradation Without Pre-filtering
+#### 4. Performance Degradation Without Pre-filtering
 - **Problem:**
   - Pure K-medoids fails catastrophically under high noise conditions
 - **Evidence:**
@@ -386,15 +383,11 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 
 ## 5.2 Quantitative Metrics Analysis
 
-<img width="640" height="427" alt="speckle_noised_image" src="https://github.com/user-attachments/assets/16f7bf83-8cf9-4df1-843c-b2378edd0951" />
-
 **Noised Image: intensity_3.0**
 
-<img width="640" height="725" alt="speckle_bw_histogram" src="https://github.com/user-attachments/assets/11fdcf6b-03c2-4343-b724-8a822db05c05" />
+#### Noised Image Metric Histogram: intensity_3.0
 
-### Noised Image Metric Histogram: intensity_3.0
-
-### PSNR Distribution
+#### PSNR Distribution
 - **Mean:** 12.74 dB  
 - **Median:** 12.93 dB  
 - **Interpretation:**
@@ -402,7 +395,7 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
   - Normal distribution centered tightly around mean
   - Some content still recoverable at values above 10 dB
 
-### SSIM Distribution
+#### SSIM Distribution
 - **Mean:** 0.45  
 - **Median:** 0.48  
 - **Interpretation:**
@@ -410,42 +403,42 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
   - Bimodal distribution suggests partial structure preservation
   - Multiplicative nature preserves structure better than impulse noise
 
-### MSE Distribution
+#### MSE Distribution
 - **Mean:** 4,458.96  
 - **Median:** 3,326.73  
 - **Interpretation:**
   - Increase: ~4.3× from low noise
   - Right-skewed distribution reflects controlled degradation
 
-### Entropy Difference
+#### Entropy Difference
 - **Mean:** 0.34  
 - **Median:** 0.26  
 - **Interpretation:**
   - Minimal information structure change
   - Tightly clustered near zero
 
-### Noise Variance
+#### Noise Variance
 - **Mean:** 4,062.41  
 - **Median:** 2,952.19  
 - **Interpretation:**
   - Increase: ~4.2× from low noise
   - Predictable variance increase due to multiplicative model
 
-### Sharpness
+#### Sharpness
 - **Mean:** 63,235.21  
 - **Median:** 41,066.96  
 - **Interpretation:**
   - Increase: ~3.2× compared to clean data
   - Smoother noise pattern than salt & pepper
 
-### Spatial Frequency
+#### Spatial Frequency
 - **Mean:** 106.86  
 - **Median:** 91.37  
 - **Interpretation:**
   - Increase: ~1.7×
   - Wider distribution reflects gradual texture buildup
 
-### Dynamic Range
+#### Dynamic Range
 - **Value:** 255.00  
 - **Interpretation:**
   - Maintained across all speckle intensities
@@ -456,21 +449,35 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 
 ## 5.3 Denoising Goals
 
-For High Noise (intensity_3.0):
+For high speckle noise conditions (intensity_3.0), denoising goals were defined based on its multiplicative nature and more moderate initial degradation compared to impulse noise:
 
-**PSNR:** Achieve 18–22 dB (recovery from 12.74 dB)  
-Goal: 5–9 dB improvement  
+- **PSNR Target: 18–22 dB (Recovery from 12.74 dB)**
+  - **Goal:**
+    - Achieve a 5–9 dB improvement
+  - **Rationale:**
+    - Speckle noise preserves more signal structure than impulse noise
+    - Higher recovery is therefore realistically achievable
 
-**SSIM:** Achieve 0.65–0.80 (recovery from 0.45)  
-Goal: Restore to near-moderate quality  
+- **SSIM Target: 0.65–0.80 (Recovery from 0.45)**
+  - **Goal:**
+    - Restore to near-moderate perceptual quality
+  - **Rationale:**
+    - Structural degradation is present but not catastrophic
+    - Values above 0.65 indicate meaningful texture consistency
 
-**MSE:** Reduce to 1,000–2,000 (from 4,458.96)  
-Goal: 55–78% reduction  
-More optimistic than salt & pepper due to better starting metrics  
+- **MSE Target: 1,000–2,000 (From 4,458.96)**
+  - **Goal:**
+    - Achieve a 55–78% reduction in reconstruction error
+  - **Rationale:**
+    - Speckle noise introduces controlled, correlated error
+    - Larger proportional reductions are feasible relative to salt and pepper
 
-**Entropy Difference:** Maintain below 0.40 (from 0.34)  
-Goal: Preserve already-good information structure  
-Avoid introducing artifacts  
+- **Entropy Difference Target: < 0.40 (From 0.34)**
+  - **Goal:**
+    - Preserve the already stable information structure
+  - **Rationale:**
+    - Speckle maintains spatial organization better than impulse noise
+    - Aggressive filtering risks artificial texture suppression
 
 ---
 
@@ -520,9 +527,7 @@ After filtering, the image is mapped back to the original intensity domain using
 
 ### 6.2.1 Visual Comparison of All Parameters
 
-![all_param_visual_speckle](https://github.com/user-attachments/assets/56360b51-b768-421d-ae21-1f59ed2f5053)
-
-### Low Filter Strength
+#### Low Filter Strength
 - **nlm_h14_t7_s21 (PSNR: 13.11 dB)**
   - Minimal improvement
   - Heavy residual speckle remains
@@ -534,7 +539,7 @@ After filtering, the image is mapped back to the original intensity domain using
 **Conclusion:**  
 - Insufficient filtering strength for intensity_3.0 speckle
 
-### Over-Smoothing Region
+#### Over-Smoothing Region
 - **nlm_h23_t7_s21 (PSNR: 14.62 dB)**
   - Higher PSNR
   - Clear texture loss
@@ -551,14 +556,6 @@ After filtering, the image is mapped back to the original intensity domain using
 ---
 
 ### 6.2.2 Heat Map Analysis – Metric Comparison
-
-The heat map visualizes normalized performance metrics on a 0–1 scale, where:
-
-- **Deep green (1.0):** Optimal performance  
-- **Yellow (0.5):** Moderate performance  
-- **Red (0.0):** Poor performance  
-
-<img width="800" height="613" alt="heatmap_speckle" src="https://github.com/user-attachments/assets/74ea20ac-0122-4ab3-9acb-a78000a34f72" />
 
 **PSNR Column:** Progressive greening from h14 → h23  
 **SSIM Column:** Wide variation; higher h reduces structural fidelity  
@@ -577,9 +574,7 @@ Trade-offs visible: Slight entropy increase for superior noise removal
 
 ## 6.3 Other Examples
 
-<img width="900" height="267" alt="best_comparison_BSDS300_18_117054" src="https://github.com/user-attachments/assets/d351184f-ad5c-4101-a7ce-018b7914e7f0" />
-
-<img width="900" height="314" alt="best_comparison_Sports_19_049" src="https://github.com/user-attachments/assets/c1033a5d-f54c-4af0-b490-4eecae59cd34" />
+(See additional visual best-result comparisons for intensity_1.0 and intensity_2.0.)
 
 ---
 
