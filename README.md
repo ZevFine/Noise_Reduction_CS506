@@ -379,23 +379,24 @@ Trade-offs visible: Slight entropy increase for superior noise removal
 
 ## 6.4 Method Limitations and Trade-offs
 
-**1. Multiplicative Noise Complexity**  
-Limitation: Signal and noise are coupled  
-Evidence: PSNR gain (~1.64 dB) much lower than salt & pepper  
-Conclusion: Log-domain NLM mitigates but cannot fully eliminate speckle
+1. **Multiplicative Noise Complexity**
+   - **Limitation:** Multiplicative coupling between signal and noise makes separation difficult.  
+   - **Evidence:** PSNR improvement (~1.64 dB) is far less than for salt & pepper (≈15.09 dB).  
+   - **Conclusion:** Log-domain NLM mitigates but does not fully resolve the multiplicative nature of speckle.
 
-**2. Dense, Correlated Noise Pattern**  
-Limitation: Intensity_3.0 overwhelms image with granularity  
-Evidence: Residual speckle persists across all parameters  
-Conclusion: Patch-based methods struggle when noise dominates all pixels
+2. **Dense, Correlated Noise Pattern**
+   - **Limitation:** At intensity_3.0, speckle introduces dense granular texture across the entire image.  
+   - **Evidence:** Visual comparison shows residual granularity throughout the scene.  
+   - **Conclusion:** Patch-based methods struggle when essentially every pixel is affected by structured noise.
 
-**3. Texture vs. Noise Ambiguity**  
-Limitation: Speckle resembles natural texture  
-Evidence: Lower sharpness after denoising  
-Conclusion: No perfect separation between texture and noise
+3. **Texture vs. Noise Ambiguity**
+   - **Limitation:** Speckle patterns can resemble genuine surface texture.  
+   - **Evidence:** Reduced sharpness (e.g., 13,251) indicates some real texture is removed along with noise.  
+   - **Conclusion:** There is no perfect solution; improving noise removal inevitably risks texture loss.
 
-**4. Parameter Sensitivity and Diminishing Returns**  
-Limitation: Beyond h = 20, performance plateaus  
-Evidence: h23 improves PSNR slightly but reduces sharpness  
-Conclusion: Method approaches its practical performance ceiling
+4. **Parameter Sensitivity and Diminishing Returns**
+   - **Limitation:** Beyond \(h = 20\), stronger smoothing yields marginal PSNR gains but worse perceptual quality.  
+   - **Evidence:** h23 gives only ~0.24 dB higher PSNR but noticeably lower sharpness (10,527 vs. 13,251).  
+   - **Conclusion:** Log-domain NLM approaches a performance ceiling at extreme speckle levels.
+
 
