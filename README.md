@@ -1,6 +1,8 @@
-### CS506:Noise Reduction Final Report 
-# By: Ashtosh Bhandari, Varada Rohokale, Zev Fine
-# Youtube Link: 
+# CS 506 Final Report: Noise Reduction in Images
+
+By: Ashtosh Bhandari, Varada Rohokale, Zev Fine
+
+YouTube Link: 
 
 ---
 
@@ -43,6 +45,21 @@
     - [6.2.2 Heat Map Analysis – Metric Comparison](#622-heat-map-analysis--metric-comparison)
   - [6.3 Other Examples](#63-other-examples)
   - [6.4 Method Limitations and Trade-offs](#64-method-limitations-and-trade-offs)
+    
+- [Section 7: Gaussian Noise Generation](#section-7-gaussian-noise-generation)
+  - [7.1 Approach and Methodology](#71-approach-and-methodology)
+  - [7.2 Quantitative Metrics Analysis](#72-quantitative-metrics-analysis)
+   
+- [Section 8: Gaussian Noise Reduction – Fourier Transform](#section-8-gaussian-noise-reduction--fourier-transform)
+  - [8.1 Denoising Methodology](#81-denoising-methodology)
+    - [8.1.1 Algorithm Selection and Rationale](#811-algorithm-selection-and-rationale)
+    - [8.1.2 Implementation – Low-Pass Filter Method](#812-implementation--low-pass-filter-method)
+    - [8.1.3 Parameter Configurations](#813-parameter-configurations)
+  - [8.2 Results Analysis](#82-results-analysis)
+    - [8.2.1 Visual Comparison of All Parameters](#821-visual-comparison-of-all-parameters)
+    - [8.2.2 Histogram Analysis – Metric Comparison](#822-histogram-analysis--metric-comparison)
+  - [8.3 Other Examples](#83-other-examples)
+  - [8.4 Limitations and Tradeoffs](#83-other-examples)
 
 
 ---
@@ -766,6 +783,12 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 ### 8.2.1 Visual Comparison of All Parameters
 
+<img width="800" height="484" alt="88E49678-561D-446D-A390-95C0AC99FBC7" src="https://github.com/user-attachments/assets/6c9103a8-2800-4bd5-891b-ef205bd07e6d" />
+
+
+<img width="800" height="1001" alt="30AAC979-4480-4D76-A69F-0AF532C2D4BC" src="https://github.com/user-attachments/assets/39d55c57-f062-451c-b442-dcea4dc67e4f" />
+
+
 | Parameter | Description (Noised) | Description (Denoised) |
 |-----------|----------------------|--------------------------|
 | N(0, 25) | Light but visible noise | Flattened noise, minor detail loss |
@@ -778,6 +801,9 @@ This balance achieved the best trade-off between smoothness and detail preservat
 ---
 
 ### 8.2.2 Histogram Analysis – Metric Comparison
+
+<img width="800" height="1333" alt="6A00FAD6-511B-426B-BE4E-146EEEC38CC3" src="https://github.com/user-attachments/assets/30e567f8-a40b-487d-9689-8cce73a79bc1" />
+
 
 **PSNR**  
 - Mean value of 24.25 indicates noticeable noise but moderate similarity to the original image.
@@ -806,9 +832,33 @@ This balance achieved the best trade-off between smoothness and detail preservat
 **Best Parameter:**  
 - Determined by the optimal balance between PSNR, SSIM, and retained visual fidelity at a cutoff near 65.
 
+  
+<img width="800" height="279" alt="D9895B0D-F465-441C-A984-2198C818DA39" src="https://github.com/user-attachments/assets/f4f3d995-7397-4c3b-9e3b-a2f28a3ac4c7" />
+
 ---
 
 ## 8.3 Other Examples
+
+![comparison_grid_mpc25](https://github.com/user-attachments/assets/7b81f4fd-f771-446f-9ad8-a2081e997d3a)
+
+<img width="800" height="314" alt="1FB35EA6-59DD-4B9F-96D1-27D4BBB66F12" src="https://github.com/user-attachments/assets/18e44a94-4b84-4e7d-bb67-3f1083bd48f8" />
+
+![comparison_grid_mp150](https://github.com/user-attachments/assets/8622e2b5-1e6c-4248-b585-2bf0004819c0)
+
+<img width="800" height="204" alt="20BF09EF-380B-4A1A-BD9F-948D09A03625" src="https://github.com/user-attachments/assets/02271dbc-de58-46ab-8953-2f872760ea1c" />
+
+## 8.3 Limitations and Trade offs
+
+1. **Loss of Fine Detail Due to Global Filtering**  
+   Fourier-based low-pass filtering suppresses high-frequency noise, but it also removes legitimate high-frequency image details such as edges, textures, and small structures. This causes a flattening effect in the image, where sharpness is reduced along with the noise.
+
+2. **Limited Visibility Recovery in Heavily Noised Regions**  
+   Gaussian noise overlaps with the image’s natural frequency content, making perfect separation between signal and noise impossible in the frequency domain. As a result, while the overall noise amplitude is reduced, underlying features cannot be fully restored, leading to smoother but not significantly clearer images.
+
+
+
+
+
 
 
 ---
