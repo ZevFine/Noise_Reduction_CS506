@@ -1,3 +1,14 @@
+***CS506:Noise Reduction Final Report***
+**By: Ashtosh Bhandari, Varada Rohokale, Zev Fine**
+*Youtube Link:*
+
+---
+
+# Index
+
+---
+
+
 # Section 1 : Introduction
 
 
@@ -82,48 +93,71 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 
 **Noised Image: amount_0.20**
 
-### Histogram: amount_0.20
+**Noised Image Metric Histogram:amount_0.20**
 
-**PSNR Distribution:** Mean = 7.85 dB, Median = 7.44 dB  
-Dramatically reduced from low noise condition  
-Degradation: ~11.5 dB decrease (60% reduction)  
-Very tight distribution indicates consistent severe degradation  
-Values below 10 dB indicate poor signal quality  
+### PSNR Distribution
+- **Mean:** 7.85 dB  
+- **Median:** 7.44 dB  
+- **Interpretation:**
+  - Dramatically reduced from low noise condition
+  - Degradation: ~11.5 dB decrease (≈60% reduction)
+  - Very tight distribution indicates consistent severe degradation
+  - Values below 10 dB indicate poor signal quality
 
-**SSIM Distribution:** Mean = 0.06, Median = 0.06  
-Severe structural degradation  
-Degradation: 0.51 decrease (89% reduction)  
-Nearly uniform distribution showing complete loss of structural similarity  
-Values approaching 0 indicate minimal resemblance to original  
+### SSIM Distribution
+- **Mean:** 0.06  
+- **Median:** 0.06  
+- **Interpretation:**
+  - Severe structural degradation
+  - Degradation: 0.51 decrease (≈89% reduction)
+  - Nearly uniform distribution showing complete loss of structural similarity
+  - Values approaching 0 indicate minimal resemblance to original
 
-**MSE Distribution:** Mean = 10,786.65, Median = 11,716.68  
-Increase: ~14x higher than low noise  
-Bimodal distribution suggests varying error patterns  
-Extremely high error values confirm substantial pixel-level differences  
+### MSE Distribution
+- **Mean:** 10,786.65  
+- **Median:** 11,716.68  
+- **Interpretation:**
+  - Increase: ~14× higher than low noise
+  - Bimodal distribution suggests varying error patterns
+  - Extremely high error values confirm substantial pixel-level differences
 
-**Entropy Difference:** Mean = 1.02, Median = 0.61  
-Significant information content change  
-Wide distribution (0 to 2.0) shows variable impact  
-Higher entropy differences indicate loss of original information structure  
+### Entropy Difference
+- **Mean:** 1.02  
+- **Median:** 0.61  
+- **Interpretation:**
+  - Significant information content change
+  - Wide distribution (0 to 2.0) shows variable impact
+  - Higher entropy differences indicate loss of original information structure
 
-**Noise Variance:** Mean = 10,090.28, Median = 10,276.23  
-Increase: ~13x higher than low noise  
-Broader distribution indicates less predictable noise impact  
-High variance confirms substantial signal corruption  
+### Noise Variance
+- **Mean:** 10,090.28  
+- **Median:** 10,276.23  
+- **Interpretation:**
+  - Increase: ~13× higher than low noise
+  - Broader distribution indicates less predictable noise impact
+  - High variance confirms substantial signal corruption
 
-**Sharpness:** Mean = 184,070.10, Median = 193,454.91  
-Increase: ~10x higher due to noise-induced high-frequency content  
-Paradoxically high values reflect noise artifacts rather than true detail  
-Distribution shows noise dominates edge detection  
+### Sharpness
+- **Mean:** 184,070.10  
+- **Median:** 193,454.91  
+- **Interpretation:**
+  - Increase: ~10× higher due to noise-induced high-frequency content
+  - High values reflect noise artifacts rather than true detail
+  - Distribution shows noise dominates edge detection
 
-**Spatial Frequency:** Mean = 191.87, Median = 197.32  
-Increase: ~3x higher than low noise  
-High spatial frequency reflects noise patterns  
-Original spatial information masked by noise  
+### Spatial Frequency
+- **Mean:** 191.87  
+- **Median:** 197.32  
+- **Interpretation:**
+  - Increase: ~3× higher than low noise
+  - High spatial frequency reflects dominant noise patterns
+  - Original spatial structure masked
 
-**Dynamic Range:** Preserved at 255.00  
-Unchanged regardless of noise level  
-Indicates salt and pepper noise utilizes full intensity range  
+### Dynamic Range
+- **Value:** 255.00  
+- **Interpretation:**
+  - Preserved regardless of noise level
+  - Indicates salt & pepper noise fully utilizes intensity range
 
 ---
 
@@ -183,28 +217,133 @@ The pre-filtered image was clustered using K-medoids with multiple cluster count
 
 ## 4.2 Results Analysis
 
-### 4.2.1 Visual Comparison of All Parameters
+## 4.2.1 Visual Comparison of All Parameters
 
-**Without Median Pre-filtering**  
-Pure clustering fails catastrophically with PSNR ≈ 8 dB.
+### Without Median Pre-filtering
+- **kmedoids_k3_no_prefilter (PSNR: 8.17 dB)**
+  - Complete failure
+  - Image remains nearly as noisy as input
+  - Demonstrates clustering alone cannot handle 20% corruption
 
-**With Median Pre-filtering**  
-kmedoids_k8_median produced the best visual and quantitative balance (PSNR ≈ 22.94 dB).
+- **kmedoids_k5_no_prefilter (PSNR: 7.98 dB)**
+  - Marginally worse than k3
+  - Increasing clusters without pre-filtering does not improve results
+
+- **kmedoids_k8_no_prefilter (PSNR: 7.97 dB)**
+  - Negligible difference from k5
+  - All non-prefiltered methods fail
+
+### With Median Pre-filtering
+- **kmedoids_k3_median (PSNR: 20.87 dB)**
+  - Dramatic improvement
+  - Image content clearly visible
+  - Demonstrates pre-filtering is essential
+
+- **kmedoids_k5_median (PSNR: 22.24 dB)**
+  - Improved detail preservation with additional clusters
+
+- **kmedoids_k8_median (PSNR: 22.94 dB)**
+  - **BEST overall performances**
+  - Optimal balance between noise removal and detail retention
+
+- **kmedoids_k10_median (PSNR: 23.08 dB)**
+  - Slight visual over-smoothing despite higher PSNR
+
+- **kmedoids_k12_median (PSNR: 23.16 dB)**
+  - Increased blurring in smooth image regions
+
+The performance gap between non-prefiltered (~8 dB) and prefiltered (~22–23 dB) methods confirms that median pre-filtering is mandatory for high-density impulse noise.
 
 ---
 
 ### 4.2.2 Heat Map Analysis – Metric Comparison
 
-Normalized heat maps reveal that prefiltered methods dominate across PSNR, SSIM, and Sharpness, while entropy and dynamic range reflect expected trade-offs.
+The heat map visualizes normalized performance metrics on a 0–1 scale, where:
+
+- **Deep green (1.0):** Optimal performance  
+- **Yellow (0.5):** Moderate performance  
+- **Red (0.0):** Poor performance  
+
+#### Non-prefiltered Methods
+- **PSNR and SSIM**
+  - Deep red across both metrics
+  - Indicates complete failure (<0.1 normalized)
+- **MSE and Entropy_Diff**
+  - Yellow regions indicate high error values
+- **Conclusion**
+  - Pure clustering cannot handle 20% salt and pepper corruption
+
+#### Prefiltered Methods
+- **PSNR column**
+  - Gradual greening from k3 to k12
+  - Normalized values increase from 0.85 → 1.0
+- **SSIM column**
+  - Strong green across all prefiltered methods
+  - Normalized range: 0.90–0.95
+- **MSE column**
+  - Consistently red despite improvement
+  - Indicates low absolute MSE, but inverted normalization scale
+- **Entropy_Diff**
+  - Yellow–orange tones indicate quantization side effect
+- **Sharpness**
+  - Strong green, confirming proper edge preservation
+- **Dynamic_Range**
+  - Yellow–orange gradient reflects range compression
+
+#### Best Parameter Performance Profile
+- **Strengths (green):**
+  - PSNR (0.94)
+  - SSIM (0.93)
+  - Sharpness (high)
+  - Noise_Variance (low)
+- **Moderate (yellow):**
+  - Entropy_Diff (0.42)
+  - Dynamic_Range (0.75)
+- **Trade-off Observed:**
+  - Slight entropy increase in exchange for superior noise removal
 
 ---
 
 ## 4.4 Method Limitations and Trade-offs
 
-- Entropy distortion due to clustering  
-- Dynamic range compression  
-- Detail loss in smooth regions  
-- Catastrophic failure without median prefiltering  
+### 1. Entropy Distortion
+- **Limitation:**
+  - K-medoids reduces continuous intensity space into discrete clusters
+- **Evidence:**
+  - Entropy_Diff increased to 2.56 instead of decreasing
+- **Visual Manifestation:**
+  - Posterization visible in smooth gradients (especially sky regions)
+- **Mitigation Needed:**
+  - Post-processing smoothing or dithering
+
+### 2. Dynamic Range Compression
+- **Limitation:**
+  - Clustering compresses intensity distribution toward cluster centers
+- **Evidence:**
+  - Dynamic range reduced from 255 to 191.09 (≈25% loss)
+- **Visual Manifestation:**
+  - Reduced contrast in highlights and shadow regions
+- **Mitigation Needed:**
+  - Histogram equalization as post-processing
+
+### 3. Detail Loss in Smooth Regions
+- **Limitation:**
+  - Median pre-filter inherently smooths fine textures
+- **Evidence:**
+  - Lower sharpness (4,254 vs. noise-free target of 15,000–20,000)
+- **Visual Manifestation:**
+  - Slight blurring in sky gradients and smooth surfaces
+- **Trade-off:**
+  - Necessary compromise for effective impulse noise removal
+
+### 4. Performance Degradation Without Pre-filtering
+- **Problem:**
+  - Pure K-medoids fails catastrophically under high noise conditions
+- **Evidence:**
+  - PSNR ≈ 8 dB without prefiltering vs. 22.94 dB with prefiltering
+  - ~3× performance gap
+- **Limitation:**
+  - Requires mandatory two-stage processing
 
 ---
 
@@ -233,45 +372,63 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 
 ### Noised Image Metric Histogram: intensity_3.0
 
-**PSNR Distribution:** Mean = 12.74 dB, Median = 12.93 dB  
-Degradation: 6.3 dB decrease from low noise (33% reduction)  
-Normal distribution centered tightly around mean  
-Values above 10 dB indicate some content still recoverable  
+### PSNR Distribution
+- **Mean:** 12.74 dB  
+- **Median:** 12.93 dB  
+- **Interpretation:**
+  - Degradation of 6.3 dB from low noise (~33% reduction)
+  - Normal distribution centered tightly around mean
+  - Some content still recoverable at values above 10 dB
 
-**SSIM Distribution:** Mean = 0.45, Median = 0.48  
-Degradation: 0.18 decrease (29% reduction)  
-Bimodal distribution with second peak around 0.80  
-Suggests some images maintain reasonable structural similarity  
-Multiplicative nature preserves structure better than impulse noise  
+### SSIM Distribution
+- **Mean:** 0.45  
+- **Median:** 0.48  
+- **Interpretation:**
+  - Decrease of 0.18 (≈29% reduction)
+  - Bimodal distribution suggests partial structure preservation
+  - Multiplicative nature preserves structure better than impulse noise
 
-**MSE Distribution:** Mean = 4,458.96, Median = 3,326.73  
-Increase: 4.3x from low noise  
-Right-skewed distribution  
-Reflects controlled degradation compared to impulse noise  
+### MSE Distribution
+- **Mean:** 4,458.96  
+- **Median:** 3,326.73  
+- **Interpretation:**
+  - Increase: ~4.3× from low noise
+  - Right-skewed distribution reflects controlled degradation
 
-**Entropy Difference:** Mean = 0.34, Median = 0.26  
-Minimal change from low noise intensity  
-Tight distribution near zero  
-Speckle maintains information structure better  
+### Entropy Difference
+- **Mean:** 0.34  
+- **Median:** 0.26  
+- **Interpretation:**
+  - Minimal information structure change
+  - Tightly clustered near zero
 
-**Noise Variance:** Mean = 4,062.41, Median = 2,952.19  
-Increase: 4.2x from low noise  
-Distribution shows controlled variance increase  
-Multiplicative model produces more predictable variance  
+### Noise Variance
+- **Mean:** 4,062.41  
+- **Median:** 2,952.19  
+- **Interpretation:**
+  - Increase: ~4.2× from low noise
+  - Predictable variance increase due to multiplicative model
 
-**Sharpness:** Mean = 63,235.21, Median = 41,066.96  
-Increase: 3.2x from low noise  
-Reflects smoother noise pattern of speckle vs. sharp impulses  
-Right-skewed distribution indicates variable impact  
+### Sharpness
+- **Mean:** 63,235.21  
+- **Median:** 41,066.96  
+- **Interpretation:**
+  - Increase: ~3.2× compared to clean data
+  - Smoother noise pattern than salt & pepper
 
-**Spatial Frequency:** Mean = 106.86, Median = 91.37  
-Increase: 1.7x from low noise  
-Broader distribution (40–160 range)  
-Speckle adds frequency content more gradually  
+### Spatial Frequency
+- **Mean:** 106.86  
+- **Median:** 91.37  
+- **Interpretation:**
+  - Increase: ~1.7×
+  - Wider distribution reflects gradual texture buildup
 
-**Dynamic Range:** Preserved at 255.00  
-Unchanged across all intensity levels  
-Clipping maintains full range utilization  
+### Dynamic Range
+- **Value:** 255.00  
+- **Interpretation:**
+  - Maintained across all speckle intensities
+  - Clipping preserves full intensity usage
+  
 
 ---
 
@@ -341,16 +498,31 @@ After filtering, the image is mapped back to the original intensity domain using
 
 ### 6.2.1 Visual Comparison of All Parameters
 
-**Low Filter Strength**  
-nlm_h14_t7_s21 (PSNR: 13.11 dB): Minimal improvement, significant residual speckle visible  
-nlm_h17_t7_s21 (PSNR: 13.70 dB): Slight improvement but still heavily corrupted  
-Analysis: Insufficient filter strength for intensity_3.0 speckle  
+### Low Filter Strength
+- **nlm_h14_t7_s21 (PSNR: 13.11 dB)**
+  - Minimal improvement
+  - Heavy residual speckle remains
 
-**Over-Smoothing Region**  
-nlm_h23_t7_s21 (PSNR: 14.62 dB): Higher PSNR but visible loss of texture  
-nlm_h20_t9_s31 (PSNR: 14.45 dB): Larger patches cause excessive smoothing  
-nlm_h23_t9_s31 (PSNR: 14.54 dB): Over-smoothed, plastic appearance  
-Analysis: Excess smoothing sacrifices natural texture  
+- **nlm_h17_t7_s21 (PSNR: 13.70 dB)**
+  - Slight improvement
+  - Still heavily corrupted
+
+**Conclusion:**  
+- Insufficient filtering strength for intensity_3.0 speckle
+
+### Over-Smoothing Region
+- **nlm_h23_t7_s21 (PSNR: 14.62 dB)**
+  - Higher PSNR
+  - Clear texture loss
+
+- **nlm_h20_t9_s31 (PSNR: 14.45 dB)**
+  - Excessive smoothing from large patch size
+
+- **nlm_h23_t9_s31 (PSNR: 14.54 dB)**
+  - Plastic-like appearance from aggressive smoothing
+
+**Conclusion:**  
+- Higher h and patch sizes sacrifice natural texture for smoothness
 
 ---
 
