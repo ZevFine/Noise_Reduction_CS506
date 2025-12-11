@@ -120,7 +120,11 @@ To evaluate and present results, we will show:
 3. Histograms, line graphs and heat maps to visualise the following metrics:  
    1. SSIM  
    2. PSNR  
-   3. Entropy / Noise Variance / Noise Std
+   3. Entropy
+   4. Noise Variance
+   5. Noise Std
+   6. Spatial Frequency
+   7. Dynamic Range
 
 ---
 
@@ -140,19 +144,14 @@ All original color and grayscale images were evaluated using the full set of ima
 
 **Brightness**
 * The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
-
 **Contrast**
 * The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
-
 **Entropy**
 * Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
-
 **Sharpness**
 * There is a lot of low sharpness, this is because the images we used have pretty low resolution.
- 
 **Spatial Frequency**
 * Like Sharpness this implies that there are a lot of blurry/low resolution images.
-  
 **Dynamic Range**
 * Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
 
@@ -164,19 +163,14 @@ All original color and grayscale images were evaluated using the full set of ima
 
 **Brightness**
 * This has more or less the same distribution as color.
-
 **Contrast**
 * The contrast is more right skewed than the color, this is because of the lack of color.
-
 **Entropy**
 * This is more or less the same distribution as color.
-
 **Sharpness**
 * This is more or less the same distribution as color.
-
 **Spatial Frequency**
 * This is more or less the same distribution as color.
-
 **Dynamic Range**
 * This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
 
@@ -213,38 +207,31 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 ### PSNR Distribution
   * Degradation: ~11.5 dB decrease (≈60% reduction)
   * Values below 10 dB indicate poor signal quality
-
 ### SSIM Distribution
   * Degradation: 0.51 decrease (≈89% reduction)
   * Nearly uniform distribution showing complete loss of structural similarity
-
 ### MSE Distribution
   * Increase: ~14× higher than low noise
   * Bimodal distribution suggests varying error patterns
   * Extremely high error values confirm substantial pixel-level differences
-
 ### Entropy Difference
   * Wide distribution (0 to 2.0) shows variable impact
   * Higher entropy differences indicate loss of original information structure
-
 ### Noise Variance
   * Increase: ~13× higher than low noise
   * Broader distribution indicates less predictable noise impact
   * High variance confirms substantial signal corruption
-
 ### Sharpness
   * Increase: ~10× higher due to noise-induced high-frequency content
   * High values reflect noise artifacts rather than true detail
   * Distribution shows noise dominates edge detection
-
 ### Spatial Frequency
   * Increase: ~3× higher than low noise
   * High spatial frequency reflects dominant noise patterns
-
 ### Dynamic Range
   * Preserved regardless of noise level
   * Indicates salt & pepper noise fully utilizes intensity range
-  * 
+    
 ---
 
 # Section 4: Salt & Pepper Denoising – K-Medoids Clustering and Median Filtering Technique
@@ -371,7 +358,7 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
   * SSIM (0.93)
   * Sharpness (high)
   * Noise_Variance (low)
-  * 
+    
 * **Moderate (yellow):**
   * Entropy_Diff (0.42)
   * Dynamic_Range (0.75)
@@ -414,7 +401,7 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
   * Lower sharpness (4,254 vs. noise-free target of 15,000–20,000)
 * **Visual Manifestation:**
   * Slight blurring in sky gradients and smooth surfaces
-  * 
+   
 ---
 
 # Section 5: Speckle Noise Generation
@@ -450,32 +437,25 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
   * Degradation of 6.3 dB from low noise (~33% reduction)
   * Normal distribution centered tightly around mean
   * Some content still recoverable at values above 10 dB
-
 ### SSIM Distribution
   * Decrease of 0.18 (≈29% reduction)
   * Bimodal distribution suggests partial structure preservation
   * Multiplicative nature preserves structure better than impulse noise
-
 ### MSE Distribution
   * Increase: ~4.3× from low noise
   * Right-skewed distribution reflects controlled degradation
-
 ### Entropy Difference
   * Minimal information structure change
   * Tightly clustered near zero
-
 ### Noise Variance
   * Increase: ~4.2× from low noise
   * Predictable variance increase due to multiplicative model
-
 ### Sharpness
   * Increase: ~3.2× compared to clean data
   * Smoother noise pattern than salt & pepper
-
 ### Spatial Frequency
   * Increase: ~1.7×
   * Wider distribution reflects gradual texture buildup
-
 ### Dynamic Range
   * Maintained across all speckle intensities
   * Clipping preserves full intensity usage
@@ -639,25 +619,18 @@ Multiple Gaussian distributions were tested using a variety of mean (μ) and sta
 
 **PSNR**
 * The PSNR is relatively low, which is expected given the large variance in noise added to the image.
-  
 **SSIM**
 * The SSIM follows a roughly normal distribution, reflecting consistent structural preservation across varied image content.
-
 **MSE**
 * The Mean Squared Error is very high, which aligns with the large magnitude of noise applied.
-
 **Entropy Difference**
 * A bimodal distribution is observed because some images originally had high entropy while others had very low complexity.
-
 **Noise Variance**
 * The noise variance is extremely high due to the aggressive noise injection.
-
 **Sharpness**
 * The sharpness remains high, indicating that despite heavy noise, textural details are still present.
-
 **Spatial Frequency**
 * Higher than denoised images, because noise introduces artificial high-frequency components.
-
 **Dynamic Range**
 * Remains high due to the full contrast span still being preserved.
 
@@ -732,28 +705,20 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 **PSNR**
 Mean value of 24.25 indicates noticeable noise but moderate similarity to the original image.
-
 **SSIM**
 * Wide variation due to diverse image structure; spike likely caused by black-background images gaining artificial texture.
-
 **MSE**
 * Bimodal distribution suggests some images recover well while others remain distorted.
-
 **Entropy Difference**
 * Low values imply flattened noise reduces randomness dispersion.
-
 **Noise Variance**
 * Near-normal distribution reflects controlled suppression.
-
 **Sharpness**
 * Relatively low due to strong low-pass filtering.
-
 **Spatial Frequency**
 * Low because both noise and blur suppress fine detail.
-
 **Dynamic Range**
 * Remains high, preserving contrast.
-
 **Best Parameter:**
 * Determined by the optimal balance between PSNR, SSIM, and retained visual fidelity at a cutoff near 65.
 
@@ -833,25 +798,18 @@ Although Poisson theory suggests lower counts correspond to higher relative nois
 
 **PSNR: 24.10**
 Moderate degradation. Unlike impulse noise (PSNR < 10 dB) or heavy speckle (~13 dB), Poisson noise preserves much of the original signal even at the highest scale. It behaves like grain rather than catastrophic pixel corruption.
-
 **SSIM: 0.45**
 Poisson noise disrupts texture and edge contrast but retains global structure.
-
 **MSE: 252.91**
 Moderate reconstruction error. Unlike salt-and-pepper noise (MSE ~10,000), Poisson noise introduces smooth perturbations rather than extreme outliers.
-
 **Entropy Difference (ED): 0.42**
-POisson adds fine-grained randomness without drastically altering entropy.
-
+Poisson adds fine-grained randomness without drastically altering entropy.
 **Noise Variance: 250.20**
 Matches Poisson theory—variance increases with intensity.
-
 **Sharpness: 5,769.35**
 Sharpness increases artificially due to noise-induced high-frequency grain.
-
 **Spatial Frequency: 35.90**
 Moderate increase typical of grain-like distortion.
-
 **Dynamic Range: 255**
 Fully preserved after clipping.
 
@@ -955,22 +913,18 @@ This pipeline reduces mid-frequency grain while preserving structure.
 * **gaussian_k3:** highest SSIM overall (~0.89)
 * **gaussian_k5** & **median_k3:** close behind
 * **median_k5:** lowest SSIM at high scales
-
 ### **PSNR Trends**
 * **median_k3:** highest PSNR (~29–30 dB)
 * **gaussian_k3:** second best
 * **bilateral_k5:** moderate
 * **gaussian_k7:** lowest PSNR
-  
 ### **Noise Variance**
 * Lowest for **gaussian_k3**, next **median_k3**
 * Highest for **gaussian_k7** and **median_k5**
-
 ### **Sharpness and SF**
 * Highest sharpness: **median_k3**
 * Moderate: **gaussian_k3**, **bilateral_k5**
 * Lowest: **gaussian_k7**
-
 ### **Dynamic Range**
 * All methods preserve dynamic range (~255)
   
