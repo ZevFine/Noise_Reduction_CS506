@@ -35,7 +35,6 @@ Make File Terminal Commands: make install && make all
 
   * [5.1 Approach and Methodology](#51-approach-and-methodology)
   * [5.2 Quantitative Metrics Analysis](#52-quantitative-metrics-analysis)
-  * [5.3 Denoising Goals](#53-denoising-goals)
 * [Section 6: Speckle Denoising – Log-Domain Non-Local Means](#section-6-speckle-denoising--log-domain-non-local-means)
 
   * [6.1 Denoising Methodology](#61-denoising-methodology)
@@ -291,7 +290,11 @@ The pre-filtered image was clustered using K-medoids with multiple cluster count
 
 <img width="900" height="328" alt="all_param _visual_sp " src="https://github.com/user-attachments/assets/6fecd256-ff1d-471c-9742-3f392d7055fb" />
 
+**All Denoised Configurations**
+
 <img width="530" height="600" alt="kmedoids_k8_median_histograms_sp" src="https://github.com/user-attachments/assets/7be4f3c6-f5cf-44ac-9810-92eabaee31f0" />
+
+**Denoised Image Histogram: All Configurations**
 
 ### Without Median Pre-filtering
 
@@ -449,7 +452,7 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 
 <img width="640" height="725" alt="speckle_bw_histogram" src="https://github.com/user-attachments/assets/11fdcf6b-03c2-4343-b724-8a822db05c05" />
 
-### Noised Image Metric Histogram: intensity_3.0
+**Noised Image Metric Histogram:intensity_3.0**
 
 ### PSNR Distribution
   * Degradation of 6.3 dB from low noise (~33% reduction)
@@ -535,7 +538,11 @@ After filtering, the image is mapped back to the original intensity domain using
 
 ![all\_param\_visual\_speckle](https://github.com/user-attachments/assets/56360b51-b768-421d-ae21-1f59ed2f5053)
 
+**All Denoise Configurations**
+
 <img width="530" height="600" alt="nlm_h20_t7_s21_histograms_speckle" src="https://github.com/user-attachments/assets/a606c2f3-9b72-42d1-928b-d0e62f865d7b" />
+
+**Denoised Image Histogram: All Configurations**
 
 ### Low Filter Strength
 
@@ -636,7 +643,7 @@ Multiple Gaussian distributions were tested using a variety of mean (μ) and sta
 
 <img width="300" height="301" alt="Screen Shot 2025-12-10 at 5 06 53 PM" src="https://github.com/user-attachments/assets/5a94c6c6-72d1-4cac-924c-586e6b4a3b7e" />
 
-#### Noised Image: X ~ N(0, 100)
+**Noised Image: X ~ N(0, 100)**
 
 **PSNR**
 * The PSNR is relatively low, which is expected given the large variance in noise added to the image.
@@ -711,16 +718,17 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 <img width="800" height="484" alt="88E49678-561D-446D-A390-95C0AC99FBC7" src="https://github.com/user-attachments/assets/6c9103a8-2800-4bd5-891b-ef205bd07e6d" />
 
+**All Denoise Configurations**
+
 <img width="800" height="1001" alt="30AAC979-4480-4D76-A69F-0AF532C2D4BC" src="https://github.com/user-attachments/assets/39d55c57-f062-451c-b442-dcea4dc67e4f" />
+
+**Noised Image Cutoff Frequency: X ~ N(0, 100)**
 
 | Parameter        | Description (Noised)         | Description (Denoised)                  |
 | ---------------- | ---------------------------- | --------------------------------------- |
-| N(0, 25)         | Light but visible noise      | Flattened noise, minor detail loss      |
-| Color N(0, 100)  | Heavy noise, clearly visible | Flatter noise with moderate detail loss |
-| N(10, 150)       | Extreme visual distortion    | Noise flattened, edges more visible     |
-| Color N(10, 25)  | Light noise, skin distortion | Smoother texture, de-aging effect       |
-| N(-10, 50)       | Moderate noise escalation    | Very blurred, silhouettes preserved     |
-| Color N(-10, 25) | Very noticeable noise        | Flatter noise, improved appearance      |
+| N(0, 100)        | Heavy noise, clearly visible | Flatter noise with moderate detail loss |
+| N(10, 25)        | Light noise, skin distortion | Smoother texture, de-aging effect       |
+| N(-10, 25)       | Very noticeable noise        | Flatter noise, improved appearance      |
 
 ---
 
@@ -728,8 +736,10 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 <img width="800" height="1333" alt="6A00FAD6-511B-426B-BE4E-146EEEC38CC3" src="https://github.com/user-attachments/assets/30e567f8-a40b-487d-9689-8cce73a79bc1" />
 
+**Denoised Image Histogram: All Confugurations**
+
 **PSNR**
-* Mean value of 24.25 indicates noticeable noise but moderate similarity to the original image.
+Mean value of 24.25 indicates noticeable noise but moderate similarity to the original image.
 
 **SSIM**
 * Wide variation due to diverse image structure; spike likely caused by black-background images gaining artificial texture.
@@ -776,11 +786,6 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 2. **Limited Visibility Recovery in Heavily Noised Regions**
    Gaussian noise overlaps with the image’s natural frequency content, making perfect separation between signal and noise impossible in the frequency domain. As a result, while the overall noise amplitude is reduced, underlying features cannot be fully restored, leading to smoother but not significantly clearer images.
-
----
-
-Here is your full text **cleanly converted into Markdown**, with **no content changed**—only properly formatted headings, tables, lists, spacing, and code-like expressions.
-
 ---
 
 # **Section 9: Poisson Noise Generation**
@@ -828,7 +833,7 @@ Although Poisson theory suggests lower counts correspond to higher relative nois
 
 ![image](https://github.com/user-attachments/assets/da09f355-38b2-41ac-bf66-50ffa05b3723)
 
-### **Noised Image: scale_5.0**
+**Noised Image: scale_5.0**
 
 | Scale   | PSNR  | SSIM | MSE    | ED   | NV    | Sharpness | SF    | DR  |
 | ------- | ----- | ---- | ------ | ---- | ----- | --------- | ----- | --- |
@@ -915,11 +920,14 @@ This pipeline reduces mid-frequency grain while preserving structure.
 
 <img width="600" height="268" alt="image (1)" src="https://github.com/user-attachments/assets/26a534f2-bf9c-4157-82c3-398171f8cd35" />
 
+**All Denoised Configurations**
+
 <img width="600" height="126" alt="image (2)" src="https://github.com/user-attachments/assets/b722127a-ac21-4563-a518-09f0631615b5" />
-bilateral filter, gaussian filter , median filter
+
+**bilateral filter, gaussian filter , median filter**
 
 <img width="600" height="127" alt="339ce052-80ee-450b-b165-48624411d233 (1)" src="https://github.com/user-attachments/assets/6b8634a9-9bdb-409a-a566-661a53788a20" />
-bilateral filter, gaussian filter , median filter
+**bilateral filter, gaussian filter , median filter**
 
 ### **Bilateral Filter (bilateral_k5)**
 * PSNR ≈ 26 dB, SSIM ≈ 0.82
@@ -973,12 +981,7 @@ bilateral filter, gaussian filter , median filter
 
 ### **Dynamic Range**
 * All methods preserve dynamic range (~255)
-
-### **Best Parameter Profile**
-
-
-
-
+  
 ---
 
 # **10.3 Other Examples**
@@ -987,7 +990,7 @@ bilateral filter, gaussian filter , median filter
 
 ---
 
-# **6.4 Method Limitations and Trade-offs**
+# **10.4 Method Limitations and Trade-offs**
 
 ### **1. Anscombe Transform Bias**
 
