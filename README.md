@@ -2,6 +2,7 @@
 
 By: Ashtosh Bhandari, Varada Rohokale, Zev Fine
 YouTube Link:
+Make File Terminal Commands: make install && make all
 
 ---
 
@@ -65,6 +66,26 @@ YouTube Link:
     * [8.2.2 Histogram Analysis – Metric Comparison](#822-histogram-analysis--metric-comparison)
   * [8.3 Other Examples](#83-other-examples)
   * [8.4 Limitations and Tradeoffs](#83-other-examples)
+* [Section 9: Poisson Noise Generation](#section-9-poisson-noise-generation)
+
+  * [9.1 Approach and Methodology](#91-approach-and-methodology)
+    * [9.1.1 Clarification on the Scale Parameter](#911-clarification-on-the-scale-parameter)
+  * [9.2 Quantitative Metrics Analysis](#92-quantitative-metrics-analysis)
+* [Section 10: Poisson Denoising – Anscombe + Gaussian / Median / Bilateral](#section-10-poisson-denoising--anscombe--gaussian--median--bilateral)
+
+  * [10.1 Denoising Methodology](#101-denoising-methodology)
+
+    * [10.1.1 Algorithm Selection and Rationale](#1011-algorithm-selection-and-rationale)
+    * [10.1.2 Implementation](#1012-implementation)
+    * [10.1.3 Parameter Configurations](#1013-parameter-configurations)
+
+  * [10.2 Results Analysis](#102-results-analysis)
+
+    * [10.2.1 Visual Comparison of All Parameters](#1021-visual-comparison-of-all-parameters)
+    * [10.2.2 Heat Map Analysis – Metric Comparison](#1022-heat-map-analysis--metric-comparison)
+
+  * [10.3 Other Examples](#103-other-examples)
+  * [10.4 Method Limitations and Trade-offs](#104-method-limitations-and-trade-offs)
 
 ---
 
@@ -84,27 +105,14 @@ We aim to produce images that, while not completely perfect or perfectly restore
    4. https://www.kaggle.com/datasets/vishalsubbiah/pokemon-images-and-types  
 
 2. We will artificially add noise, by using Gaussian noise, Poisson noise, Salt and Pepper noise, and Speckle noise  
-   1. Preliminary Visuals of Noised Data:  
-      1. Gaussian Noise  
-         ![Gaussian](Data&Results/Gaussian.png)
-      2. Poisson noise  
-         ![Poisson](Data&Results/Poisson.png)
-      3. Salt and Pepper  
-         ![Salt & Pepper](Data&Results/SaltPepper.png)
-      4. Speckle  
-         ![Speckle](Data&Results/Speckle.png)
+
 
 ## Methods for Noise Reduction
-
-1. Mathematical techniques  
-   1. Gaussian Noise  
-      1. Fourier Transform 
-   2. Poisson Noise  
-      1. Anscombe transform  
-   3. Salt and Pepper Noise  
-      1. Kmediods Clustering and Median Filtering  
-   4. Speckle Noise  
-      1. Log-transform Non Local Means
+  
+   1. Gaussian Noise  : Fourier Transform 
+   2. Poisson Noise  :  Anscombe transform  
+   3. Salt and Pepper Noise  : Kmediods Clustering and Median Filtering  
+   4. Speckle Noise  : Log-transform Non Local Means
 
 ## Data visualization
 To evaluate and present results, we will show:
@@ -240,29 +248,10 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 ### Dynamic Range
   * Preserved regardless of noise level
   * Indicates salt & pepper noise fully utilizes intensity range
-
+  * 
 ---
 
-## 3.3 Denoising Goals
-
-For Severe Noise (amount_0.20):
-
-**PSNR:** Achieve 15–20 dB (recovery from 7.85 dB)
-Goal: 2–3x improvement
-Rationale: Above 15 dB makes content recognizable
-
-**SSIM:** Achieve 0.40–0.60 (recovery from 0.06)
-Goal: Restore basic structural information
-
-**MSE:** Reduce to 3,000–5,000 (from 10,786.65)
-Goal: 50–70% reduction
-
-**Entropy Difference:** Reduce to 0.20–0.40 (from 1.02)
-Goal: Restore information structure and balance denoising with detail preservation
-
----
-
-# Section 4: Salt & Pepper Denoising – K-Medoids Clustering Technique
+# Section 4: Salt & Pepper Denoising – K-Medoids Clustering and Median Filtering Technique
 
 ## 4.1 Denoising Methodology
 
@@ -274,7 +263,7 @@ K-medoids was selected for its robustness to outliers, suitability for discrete 
 
 A two-stage hybrid approach was used:
 
-**Stage 1: Adaptive Impulse Detection and Median Filtering**
+**Stage 1: Median Filtering**
 Pixels exceeding intensity thresholds were selectively median filtered to preserve edges while removing extreme impulses.
 
 **Stage 2: K-medoids Refinement**
@@ -302,6 +291,8 @@ The pre-filtered image was clustered using K-medoids with multiple cluster count
 ## 4.2.1 Visual Comparison of All Parameters
 
 <img width="900" height="328" alt="all_param _visual_sp " src="https://github.com/user-attachments/assets/6fecd256-ff1d-471c-9742-3f392d7055fb" />
+
+<img width="530" height="600" alt="kmedoids_k8_median_histograms_sp" src="https://github.com/user-attachments/assets/7be4f3c6-f5cf-44ac-9810-92eabaee31f0" />
 
 ### Without Median Pre-filtering
 
@@ -497,26 +488,6 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 
 ---
 
-## 5.3 Denoising Goals
-
-For High Noise (intensity_3.0):
-
-**PSNR:** Achieve 18–22 dB (recovery from 12.74 dB)
-Goal: 5–9 dB improvement
-
-**SSIM:** Achieve 0.65–0.80 (recovery from 0.45)
-Goal: Restore to near-moderate quality
-
-**MSE:** Reduce to 1,000–2,000 (from 4,458.96)
-Goal: 55–78% reduction
-More optimistic than salt & pepper due to better starting metrics
-
-**Entropy Difference:** Maintain below 0.40 (from 0.34)
-Goal: Preserve already-good information structure
-Avoid introducing artifacts
-
----
-
 # Section 6: Speckle Denoising – Log-Domain Non-Local Means
 
 ## 6.1 Denoising Methodology
@@ -564,6 +535,8 @@ After filtering, the image is mapped back to the original intensity domain using
 ### 6.2.1 Visual Comparison of All Parameters
 
 ![all\_param\_visual\_speckle](https://github.com/user-attachments/assets/56360b51-b768-421d-ae21-1f59ed2f5053)
+
+<img width="530" height="600" alt="nlm_h20_t7_s21_histograms_speckle" src="https://github.com/user-attachments/assets/a606c2f3-9b72-42d1-928b-d0e62f865d7b" />
 
 ### Low Filter Strength
 
@@ -654,13 +627,15 @@ Multiple Gaussian distributions were tested using a variety of mean (μ) and sta
 
 | Distribution Type | Sigma (σ) Values | Mu (μ) Values | Description             |
 | ----------------- | ---------------- | ------------- | ----------------------- |
-| N(μ, σ)           | 25, 50, 100, 150 | Positive      | Brightness-biased noise |
-| N(μ, σ)           | 25, 50, 100, 150 | Negative      | Darkening-biased noise  |
-| N(μ, σ)           | 25, 50, 100, 150 | Equal         | Zero-centered noise     |
+| N(μ, σ)           | 25, 50, 100, 150 | 10            | Brightness-biased noise |
+| N(μ, σ)           | 25, 50, 100, 150 | 10            | Darkening-biased noise  |
+| N(μ, σ)           | 25, 50, 100, 150 | 0             | Zero-centered noise     |
 
 ---
 
 ### 7.2 Quantitative Metrics Analysis
+
+<img width="300" height="301" alt="Screen Shot 2025-12-10 at 5 06 53 PM" src="https://github.com/user-attachments/assets/5a94c6c6-72d1-4cac-924c-586e6b4a3b7e" />
 
 #### Noised Image: X ~ N(0, 100)
 
@@ -687,34 +662,6 @@ Multiple Gaussian distributions were tested using a variety of mean (μ) and sta
 
 **Dynamic Range**
 * Remains high due to the full contrast span still being preserved.
-
----
-
-#### Noised Image: X ~ N(-10, 50) — Black & White
-
-**PSNR**
-* Very low, consistent with strong Gaussian interference.
-
-**SSIM**
-* Extremely low due to chromatic distortion from noise affecting grayscale reconstruction.
-
-**MSE**
-* Very high, reflecting heavy deviations from the original image.
-
-**Entropy Difference**
-* Again bimodal due to variation in original image complexity.
-
-**Noise Variance**
-* High variance confirms aggressive noise magnitude.
-
-**Sharpness**
-* Moderately high due to preserved high-frequency artifacts.
-
-**Spatial Frequency**
-* Comparable to some denoised color cases due to grayscale texture consistency.
-
-**Dynamic Range**
-* Preserved due to maintained contrast extremes.
 
 ---
 
@@ -751,11 +698,11 @@ This balance achieved the best trade-off between smoothness and detail preservat
 
 ### 8.1.3 Parameter Configurations
 
-| Distribution | Sigma (σ)        | Mu (μ)   | Description                |
-| ------------ | ---------------- | -------- | -------------------------- |
-| N(μ, σ)      | 25, 50, 100, 150 | Positive | Bright-biased denoising    |
-| N(μ, σ)      | 25, 50, 100, 150 | Negative | Dark-biased denoising      |
-| N(μ, σ)      | 25, 50, 100, 150 | Neutral  | Zero-centered distribution |
+| Distribution | Sigma (σ)        | Mu (μ)   | Cutoff                              |
+| ------------ | ---------------- | -------- | ------------------------------------|            
+| N(μ, σ)      | 25, 50, 100, 150 | Positive | 25, 50, 75, 100,125, 150, 175, 200  |
+| N(μ, σ)      | 25, 50, 100, 150 | Negative | 25, 50, 75, 100,125, 150, 175, 200  |
+| N(μ, σ)      | 25, 50, 100, 150 | Neutral  | 25, 50, 75, 100,125, 150, 175, 200  |
 
 ---
 
@@ -832,4 +779,234 @@ This balance achieved the best trade-off between smoothness and detail preservat
    Gaussian noise overlaps with the image’s natural frequency content, making perfect separation between signal and noise impossible in the frequency domain. As a result, while the overall noise amplitude is reduced, underlying features cannot be fully restored, leading to smoother but not significantly clearer images.
 
 ---
+
+Here is your full text **cleanly converted into Markdown**, with **no content changed**—only properly formatted headings, tables, lists, spacing, and code-like expressions.
+
+---
+
+# **Section 9: Poisson Noise Generation**
+
+## **9.1 Approach and Methodology**
+
+Poisson noise, also known as shot noise, is a signal-dependent noise that arises from discrete photon-counting processes in imaging sensors. Unlike additive noise models, Poisson noise has a variance equal to its mean, causing brighter regions to exhibit stronger absolute noise. This makes it fundamentally different from Gaussian, speckle, and salt-and-pepper noise.
+
+We tested five noise intensity settings by varying the scale factor:
+
+### **Parameters**
+
+| Scale     | Description                       |
+| --------- | --------------------------------- |
+| **s_0.5** | Light Poisson (low photon counts) |
+| **s_1.0** | Moderate Poisson                  |
+| **s_2.0** | Heavy Poisson                     |
+| **s_4.0** | Severe Poisson                    |
+| **s_5.0** | Extreme Poisson                   |
+
+---
+
+### **9.1.1 Clarification on the Scale Parameter**
+
+Although Poisson theory suggests lower counts correspond to higher relative noise, the *isual appearance in this implementation behaves differently due to the scaling method.
+
+**When s is high (4.0, 5.0):**
+
+* Poisson mean becomes large: **s · I**
+* Poisson variance increases (variance = mean)
+* Sampled fluctuations grow significantly before division
+* After dividing by **s**, these fluctuations create stronger visible grain
+
+**When s is low (0.5, 0.1):**
+
+* **s · I** becomes very small
+* Poisson sampling collapses to discrete values
+* After division, produces faint posterization rather than grain
+
+**Thus, in this implementation: increasing s → more visible Poisson grain.**
+
+---
+
+## **9.2 Quantitative Metrics Analysis**
+
+![image](https://github.com/user-attachments/assets/da09f355-38b2-41ac-bf66-50ffa05b3723)
+
+### **Noised Image: scale_5.0**
+
+| Scale   | PSNR  | SSIM | MSE    | ED   | NV    | Sharpness | SF    | DR  |
+| ------- | ----- | ---- | ------ | ---- | ----- | --------- | ----- | --- |
+| **5.0** | 24.10 | 0.45 | 252.91 | 0.42 | 250.2 | 5769.35   | 35.90 | 255 |
+
+**PSNR: 24.10**
+Moderate degradation. Unlike impulse noise (PSNR < 10 dB) or heavy speckle (~13 dB), Poisson noise preserves much of the original signal even at the highest scale. It behaves like grain rather than catastrophic pixel corruption.
+
+**SSIM: 0.45**
+Poisson noise disrupts texture and edge contrast but retains global structure.
+
+**MSE: 252.91**
+Moderate reconstruction error. Unlike salt-and-pepper noise (MSE ~10,000), Poisson noise introduces smooth perturbations rather than extreme outliers.
+
+**Entropy Difference (ED): 0.42**
+POisson adds fine-grained randomness without drastically altering entropy.
+
+**Noise Variance: 250.20**
+Matches Poisson theory—variance increases with intensity.
+
+**Sharpness: 5,769.35**
+Sharpness increases artificially due to noise-induced high-frequency grain.
+
+**Spatial Frequency: 35.90**
+Moderate increase typical of grain-like distortion.
+
+**Dynamic Range: 255**
+Fully preserved after clipping.
+
+---
+
+# **Section 10: Poisson Denoising with Anscombe Transform + Gaussian / Median / Bilateral Filters**
+
+## **10.1.1 Algorithm Selection and Rationale**
+
+Poisson noise is signal-dependent, meaning noise magnitude ∝ pixel intensity. Classical additive-noise filters assume uniform variance, so they are mismatched for Poisson noise. After anscombe transform, noise becomes approximately homoscedastic. Applying gaussian filter gives strong smoothing, high PSNR, Median filter preserves edges, good for impulsive structures and Bilateral filter preserves edges using spatial + intensity weighting. This makes it much faster and more analyzable than wavelet or Bayesian Poisson denoisers.
+
+---
+
+## **10.1.2 Implementation**
+
+To address this, we use a two-stage strategy:
+
+1. **Apply Anscombe variance-stabilizing transform**
+   Converts Poisson noise into approximately additive Gaussian noise.
+
+2. **Apply standard spatial filters**
+   Gaussian, median, or bilateral filtering in the transformed domain.
+
+3. **Apply exact unbiased inverse Anscombe transform**
+   Restores intensity distribution with minimized bias.
+
+This pipeline reduces mid-frequency grain while preserving structure.
+
+## **10.1.3 Parameter Configurations**
+
+### **Gaussian Blur**
+
+| Config       | Kernel | σ    | Description        |
+| ------------ | ------ | ---- | ------------------ |
+| **gauss_k3** | 3×3    | ~1.0 | Light smoothing    |
+| **gauss_k5** | 5×5    | ~1.5 | Moderate smoothing |
+| **gauss_k9** | 9×9    | ~2.5 | Strong smoothing   |
+
+### **Median Filter**
+
+| Config        | Kernel | Description                        |
+| ------------- | ------ | ---------------------------------- |
+| **median_k3** | 3×3    | Good edges, weaker noise reduction |
+| **median_k5** | 5×5    | More smoothing, risk of artifacts  |
+| **median_k9** | 9×9    | Over-smoothing                     |
+
+### **Bilateral Filter**
+
+| Config           | Diameter | sigmaColor | sigmaSpace | Description                |
+| ---------------- | -------- | ---------- | ---------- | -------------------------- |
+| **bilateral_d5** | 5        | 25         | 25         | Light edge-aware smoothing |
+
+---
+
+## **10.2 Results Analysis**
+
+### **10.2.1 Visual Comparison of All Parameters**
+
+<img width="600" height="268" alt="image (1)" src="https://github.com/user-attachments/assets/26a534f2-bf9c-4157-82c3-398171f8cd35" />
+
+<img width="600" height="126" alt="image (2)" src="https://github.com/user-attachments/assets/b722127a-ac21-4563-a518-09f0631615b5" />
+bilateral filter, gaussian filter , median filter
+
+<img width="600" height="127" alt="339ce052-80ee-450b-b165-48624411d233 (1)" src="https://github.com/user-attachments/assets/6b8634a9-9bdb-409a-a566-661a53788a20" />
+bilateral filter, gaussian filter , median filter
+
+### **Bilateral Filter (bilateral_k5)**
+* PSNR ≈ 26 dB, SSIM ≈ 0.82
+* Reduces grain while preserving edges
+* Leaves residual speckled texture
+
+### **Gaussian Filters**
+#### **gaussian_k3**
+* PSNR ≈ 27.5 dB, SSIM ≈ 0.84
+* Best balance of sharpness + smoothing
+#### **gaussian_k5**
+* More smoothing, slight loss of micro-details
+#### **gaussian_k7**
+* Over-smoothed, “plastic” appearance
+
+### **Median Filters**
+#### **median_k3**
+* PSNR 27.5–30 dB
+* Very crisp edges, strong grain reduction
+* Often sharper than gaussian_k3
+#### **median_k5**
+* More smoothing, introduces blockiness
+
+---
+
+## **10.2.2 Heat Map Analysis – Metric Comparison**
+
+<img width="273" height="600" alt="image (4)" src="https://github.com/user-attachments/assets/c1924c72-60db-4607-9cc8-1f5c7986fb37" />
+
+<img width="271" height="600" alt="image (3)" src="https://github.com/user-attachments/assets/770f8be3-325c-419f-9ba5-8424405edfe1" />
+
+### **SSIM Trends**
+* **gaussian_k3:** highest SSIM overall (~0.89)
+* **gaussian_k5** & **median_k3:** close behind
+* **median_k5:** lowest SSIM at high scales
+
+### **PSNR Trends**
+* **median_k3:** highest PSNR (~29–30 dB)
+* **gaussian_k3:** second best
+* **bilateral_k5:** moderate
+* **gaussian_k7:** lowest PSNR
+  
+### **Noise Variance**
+* Lowest for **gaussian_k3**, next **median_k3**
+* Highest for **gaussian_k7** and **median_k5**
+
+### **Sharpness and SF**
+* Highest sharpness: **median_k3**
+* Moderate: **gaussian_k3**, **bilateral_k5**
+* Lowest: **gaussian_k7**
+
+### **Dynamic Range**
+* All methods preserve dynamic range (~255)
+
+### **Best Parameter Profile**
+
+
+
+
+---
+
+# **10.3 Other Examples**
+
+<img width="600" height="342" alt="image (5)" src="https://github.com/user-attachments/assets/9100c715-c857-4245-aa16-be42c420f4de" />
+
+---
+
+# **6.4 Method Limitations and Trade-offs**
+
+### **1. Anscombe Transform Bias**
+
+* Only approximate stabilization at low intensities
+* Dark regions retain inconsistency
+* Simple but not fully accurate for low-photon counts
+
+### **2. Gaussian Over-smoothing**
+
+* Large kernels blur fine structure
+* “Plastic” appearance
+* Good PSNR but loses texture
+
+### **3. Bilateral Filter Complexity**
+
+* Highly sensitive to tuning
+* Too low → residual grain
+* Too high → cartoon-like textures
+
+
 
