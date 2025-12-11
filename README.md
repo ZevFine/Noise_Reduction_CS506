@@ -142,18 +142,23 @@ All original color and grayscale images were evaluated using the full set of ima
 
 <img width="600" height="600" alt="CAB5E2DD-9F2C-490B-BE36-99E4D271C597" src="https://github.com/user-attachments/assets/3ba82dc3-5fdb-49e5-97c4-7da9c0041365" />
 
-**Brightness**
-* The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
-**Contrast**
-* The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
-**Entropy**
-* Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
-**Sharpness**
-* There is a lot of low sharpness, this is because the images we used have pretty low resolution.
-**Spatial Frequency**
-* Like Sharpness this implies that there are a lot of blurry/low resolution images.
-**Dynamic Range**
-* Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
+
+### Brightness
+  * The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
+### Contrast
+  * The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
+### MSE Distribution
+  * Increase: ~14× higher than low noise
+  * Bimodal distribution suggests varying error patterns
+  * Extremely high error values confirm substantial pixel-level differences
+### Entropy 
+  * Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
+### Sharpness
+  * There is a lot of low sharpness, this is because the images we used have pretty low resolution.
+### Spatial Frequency
+  * Like Sharpness this implies that there are a lot of blurry/low resolution images.
+### Dynamic Range
+  * Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
 
 ---
 
@@ -161,19 +166,19 @@ All original color and grayscale images were evaluated using the full set of ima
 
 <img width="600" height="600" alt="20E5BC35-B369-40D8-8256-AD6B6F9FFE30" src="https://github.com/user-attachments/assets/ebe88aa8-7ebb-4323-afd2-d76cc5cad131" />
 
-**Brightness**
-* This has more or less the same distribution as color.
-**Contrast**
-* The contrast is more right skewed than the color, this is because of the lack of color.
-**Entropy**
-* This is more or less the same distribution as color.
-**Sharpness**
-* This is more or less the same distribution as color.
-**Spatial Frequency**
-* This is more or less the same distribution as color.
-**Dynamic Range**
-* This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
-
+### Brightness
+  * This has more or less the same distribution as color.
+### Contrast
+  * The contrast is more right skewed than the color, this is because of the lack of color.
+### Entropy 
+  * This is more or less the same distribution as color.
+### Sharpness
+  * This is more or less the same distribution as color.
+### Spatial Frequency
+  * This is more or less the same distribution as color.
+### Dynamic Range
+  * This is more or less the same distribution as color, it has more variance because when the photo went grayscale it doesn't allow as big of a difference between the two extremes.
+    
 ---
 
 # Section 3 : Salt & Pepper Noise Generation
