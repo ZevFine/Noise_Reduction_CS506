@@ -1,8 +1,9 @@
 # CS 506 Final Report: Noise Reduction in Images
 
-By: Ashtosh Bhandari, Varada Rohokale, Zev Fine
-YouTube Link:
-Make File Terminal Commands: make install && make all
+**By:** Ashtosh Bhandari, Varada Rohokale, Zev Fine  
+**YouTube Link:**  
+**Make File Terminal Commands:**  
+`make install && make all`
 
 ---
 
@@ -134,35 +135,33 @@ All original color and grayscale images were evaluated using the full set of ima
 
 ## 2.2 Quantitative Metrics Analysis
 
-### Color Images
-
 <img width="600" height="600" alt="CAB5E2DD-9F2C-490B-BE36-99E4D271C597" src="https://github.com/user-attachments/assets/3ba82dc3-5fdb-49e5-97c4-7da9c0041365" />
 
+**Color Images Histogram**
 
 **Brightness**
-* The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
+The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
 
 **Contrast**
-* The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
+The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
 
 **Entropy**
 * Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
 
 **Sharpness**
 * There is a lot of low sharpness, this is because the images we used have pretty low resolution.
-* 
+ 
 **Spatial Frequency**
 * Like Sharpness this implies that there are a lot of blurry/low resolution images.
-* 
+  
 **Dynamic Range**
 * Since this is scaled to 1, the contrast between the darkest and lightest pixels are high.
 
 ---
 
-### Black and White Images
-
 <img width="600" height="600" alt="20E5BC35-B369-40D8-8256-AD6B6F9FFE30" src="https://github.com/user-attachments/assets/ebe88aa8-7ebb-4323-afd2-d76cc5cad131" />
 
+**Black and White Images Histogram**
 
 **Brightness**
 * This has more or less the same distribution as color.
