@@ -1,7 +1,7 @@
 # CS 506 Final Report: Noise Reduction in Images
 
 **By:** Ashtosh Bhandari, Varada Rohokale, Zev Fine  
-**YouTube Link:**  
+**YouTube Link:** https://www.youtube.com/watch?v=mrSY30OLJxM 
 **Make File Terminal Commands:**  `make install && make all`
 
 ---
