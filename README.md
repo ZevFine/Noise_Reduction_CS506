@@ -69,7 +69,6 @@ Make File Terminal Commands: make install && make all
 * [Section 9: Poisson Noise Generation](#section-9-poisson-noise-generation)
 
   * [9.1 Approach and Methodology](#91-approach-and-methodology)
-    * [9.1.1 Clarification on the Scale Parameter](#911-clarification-on-the-scale-parameter)
   * [9.2 Quantitative Metrics Analysis](#92-quantitative-metrics-analysis)
 * [Section 10: Poisson Denoising – Anscombe + Gaussian / Median / Bilateral](#section-10-poisson-denoising--anscombe--gaussian--median--bilateral)
 
