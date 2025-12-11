@@ -9,83 +9,70 @@
 # Index
 
 * [Section 1: Introduction](#section-1--introduction)
-* [Section 2: Pre-Noise Metrics](#section-2--pre-noise-metrics)
 
+* [Section 2: Pre-Noise Metrics](#section-2--pre-noise-metrics)
   * [2.1 Approach and Methodology](#21-approach-and-methodology)
   * [2.2 Quantitative Metrics Analysis](#22-quantitative-metrics-analysis)
 
-* [Section 3: Salt & Pepper Noise Generation](#section-3-salt--pepper-noise-generation)
-
+* [Section 3: Salt & Pepper Noise Generation](#section-3--salt--pepper-noise-generation)
   * [3.1 Approach and Methodology](#31-approach-and-methodology)
   * [3.2 Quantitative Metrics Analysis](#32-quantitative-metrics-analysis)
   * [3.3 Denoising Goals](#33-denoising-goals)
 
-* [Section 4: Salt & Pepper Denoising – K-Medoids Clustering](#section-4-salt--pepper-denoising--k-medoids-clustering)
-
+* [Section 4: Salt & Pepper Denoising – K-Medoids Clustering and Median Filtering](#section-4-salt--pepper-denoising--k-medoids-clustering-and-median-filtering)
   * [4.1 Denoising Methodology](#41-denoising-methodology)
-
     * [4.1.1 Algorithm Selection and Rationale](#411-algorithm-selection-and-rationale)
     * [4.1.2 Implementation](#412-implementation)
     * [4.1.3 Parameter Configurations](#413-parameter-configurations)
-
   * [4.2 Results Analysis](#42-results-analysis)
-
     * [4.2.1 Visual Comparison of All Parameters](#421-visual-comparison-of-all-parameters)
     * [4.2.2 Heat Map Analysis – Metric Comparison](#422-heat-map-analysis--metric-comparison)
-
   * [4.3 Other Examples](#43-other-examples)
   * [4.4 Method Limitations and Trade-offs](#44-method-limitations-and-trade-offs)
-* [Section 5: Speckle Noise Generation](#section-5-speckle-noise-generation)
 
+* [Section 5: Speckle Noise Generation](#section-5-speckle-noise-generation)
   * [5.1 Approach and Methodology](#51-approach-and-methodology)
   * [5.2 Quantitative Metrics Analysis](#52-quantitative-metrics-analysis)
+  * [5.3 Denoising Goals](#53-denoising-goals)
+
 * [Section 6: Speckle Denoising – Log-Domain Non-Local Means](#section-6-speckle-denoising--log-domain-non-local-means)
-
   * [6.1 Denoising Methodology](#61-denoising-methodology)
-
     * [6.1.1 Algorithm Selection and Rationale](#611-algorithm-selection-and-rationale)
     * [6.1.2 Implementation](#612-implementation)
     * [6.1.3 Parameter Configurations](#613-parameter-configurations)
   * [6.2 Results Analysis](#62-results-analysis)
-
     * [6.2.1 Visual Comparison of All Parameters](#621-visual-comparison-of-all-parameters)
     * [6.2.2 Heat Map Analysis – Metric Comparison](#622-heat-map-analysis--metric-comparison)
   * [6.3 Other Examples](#63-other-examples)
   * [6.4 Method Limitations and Trade-offs](#64-method-limitations-and-trade-offs)
-* [Section 7: Gaussian Noise Generation](#section-7-gaussian-noise-generation)
 
+* [Section 7: Gaussian Noise Generation](#section-7-gaussian-noise-generation)
   * [7.1 Approach and Methodology](#71-approach-and-methodology)
   * [7.2 Quantitative Metrics Analysis](#72-quantitative-metrics-analysis)
+
 * [Section 8: Gaussian Noise Reduction – Fourier Transform](#section-8-gaussian-noise-reduction--fourier-transform)
-
   * [8.1 Denoising Methodology](#81-denoising-methodology)
-
     * [8.1.1 Algorithm Selection and Rationale](#811-algorithm-selection-and-rationale)
     * [8.1.2 Implementation – Low-Pass Filter Method](#812-implementation--low-pass-filter-method)
     * [8.1.3 Parameter Configurations](#813-parameter-configurations)
   * [8.2 Results Analysis](#82-results-analysis)
-
     * [8.2.1 Visual Comparison of All Parameters](#821-visual-comparison-of-all-parameters)
     * [8.2.2 Histogram Analysis – Metric Comparison](#822-histogram-analysis--metric-comparison)
   * [8.3 Other Examples](#83-other-examples)
-  * [8.4 Limitations and Tradeoffs](#83-other-examples)
-* [Section 9: Poisson Noise Generation](#section-9-poisson-noise-generation)
+  * [8.4 Limitations and Tradeoffs](#84-limitations-and-tradeoffs)
 
+* [Section 9: Poisson Noise Generation](#section-9-poisson-noise-generation)
   * [9.1 Approach and Methodology](#91-approach-and-methodology)
   * [9.2 Quantitative Metrics Analysis](#92-quantitative-metrics-analysis)
+
 * [Section 10: Poisson Denoising – Anscombe + Gaussian / Median / Bilateral](#section-10-poisson-denoising--anscombe--gaussian--median--bilateral)
-
   * [10.1 Denoising Methodology](#101-denoising-methodology)
-
     * [10.1.1 Algorithm Selection and Rationale](#1011-algorithm-selection-and-rationale)
     * [10.1.2 Implementation](#1012-implementation)
     * [10.1.3 Parameter Configurations](#1013-parameter-configurations)
-
   * [10.2 Results Analysis](#102-results-analysis)
-
     * [10.2.1 Visual Comparison of All Parameters](#1021-visual-comparison-of-all-parameters)
     * [10.2.2 Heat Map Analysis – Metric Comparison](#1022-heat-map-analysis--metric-comparison)
-
   * [10.3 Other Examples](#103-other-examples)
   * [10.4 Method Limitations and Trade-offs](#104-method-limitations-and-trade-offs)
 
