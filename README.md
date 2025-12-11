@@ -2,8 +2,7 @@
 
 **By:** Ashtosh Bhandari, Varada Rohokale, Zev Fine  
 **YouTube Link:**  
-**Make File Terminal Commands:**  
-`make install && make all`
+**Make File Terminal Commands:**  `make install && make all`
 
 ---
 
@@ -135,15 +134,15 @@ All original color and grayscale images were evaluated using the full set of ima
 
 ## 2.2 Quantitative Metrics Analysis
 
-<img width="600" height="600" alt="CAB5E2DD-9F2C-490B-BE36-99E4D271C597" src="https://github.com/user-attachments/assets/3ba82dc3-5fdb-49e5-97c4-7da9c0041365" />
-
 **Color Images Histogram**
 
+<img width="600" height="600" alt="CAB5E2DD-9F2C-490B-BE36-99E4D271C597" src="https://github.com/user-attachments/assets/3ba82dc3-5fdb-49e5-97c4-7da9c0041365" />
+
 **Brightness**
-The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
+* The mean is further to the right here, which would imply that overall the photos are pretty dark, but there are some brighter outliers.
 
 **Contrast**
-The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
+* The contrast has a lot of variance, there are sudden spikes, these are because the data sets where the photo has a black background.
 
 **Entropy**
 * Overall the photos are not that complex. This most likely stems from the pokemon and pistachio data sets, because they have the black backgrounds. The huge spike at the end is the rest of the images, where the whole image has something going on.
@@ -159,9 +158,9 @@ The contrast has a lot of variance, there are sudden spikes, these are because t
 
 ---
 
-<img width="600" height="600" alt="20E5BC35-B369-40D8-8256-AD6B6F9FFE30" src="https://github.com/user-attachments/assets/ebe88aa8-7ebb-4323-afd2-d76cc5cad131" />
-
 **Black and White Images Histogram**
+
+<img width="600" height="600" alt="20E5BC35-B369-40D8-8256-AD6B6F9FFE30" src="https://github.com/user-attachments/assets/ebe88aa8-7ebb-4323-afd2-d76cc5cad131" />
 
 **Brightness**
 * This has more or less the same distribution as color.
@@ -343,7 +342,6 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 * **PSNR and SSIM**
   * Deep red across both metrics
   * Indicates complete failure (<0.1 normalized)
-  * 
 * **MSE and Entropy_Diff**
   * Yellow regions indicate high error values
   * Pure clustering cannot handle 20% salt and pepper corruption
@@ -352,22 +350,17 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 
 * **PSNR column**
   * Gradual greening from k3 to k12
-  * Normalized values increase from 0.85 → 1.0
-    
+  * Normalized values increase from 0.85 → 1.0   
 * **SSIM column**
   * Strong green across all prefiltered methods
-  * Normalized range: 0.90–0.95
-    
+  * Normalized range: 0.90–0.95  
 * **MSE column**
   * Consistently red despite improvement
-  * Indicates low absolute MSE, but inverted normalization scale
-    
+  * Indicates low absolute MSE, but inverted normalization scale  
 * **Entropy_Diff**
   * Yellow–orange tones indicate quantization side effect
-    
 * **Sharpness**
   * Strong green, confirming proper edge preservation
-    
 * **Dynamic_Range**
   * Yellow–orange gradient reflects range compression
 
