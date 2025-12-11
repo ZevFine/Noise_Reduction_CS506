@@ -842,7 +842,7 @@ This pipeline reduces mid-frequency grain while preserving structure.
 | ------------ | ------ | ---- | ------------------ |
 | **gauss_k3** | 3×3    | ~1.0 | Light smoothing    |
 | **gauss_k5** | 5×5    | ~1.5 | Moderate smoothing |
-| **gauss_k9** | 9×9    | ~2.5 | Strong smoothing   |
+| **gauss_k7** | 7×7    | ~2.5 | Strong smoothing   |
 
 ### **Median Filter**
 
@@ -850,7 +850,6 @@ This pipeline reduces mid-frequency grain while preserving structure.
 | ------------- | ------ | ---------------------------------- |
 | **median_k3** | 3×3    | Good edges, weaker noise reduction |
 | **median_k5** | 5×5    | More smoothing, risk of artifacts  |
-| **median_k9** | 9×9    | Over-smoothing                     |
 
 ### **Bilateral Filter**
 
