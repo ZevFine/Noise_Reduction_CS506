@@ -207,74 +207,37 @@ Salt and pepper noise, also known as impulse noise, is a form of noise character
 **Noised Image Metric Histogram:amount_0.20**
 
 ### PSNR Distribution
-
-* **Mean:** 7.85 dB
-* **Median:** 7.44 dB
-* **Interpretation:**
-  * Dramatically reduced from low noise condition
   * Degradation: ~11.5 dB decrease (≈60% reduction)
-  * Very tight distribution indicates consistent severe degradation
   * Values below 10 dB indicate poor signal quality
 
 ### SSIM Distribution
-
-* **Mean:** 0.06
-* **Median:** 0.06
-* **Interpretation:**
-  * Severe structural degradation
   * Degradation: 0.51 decrease (≈89% reduction)
   * Nearly uniform distribution showing complete loss of structural similarity
-  * Values approaching 0 indicate minimal resemblance to original
 
 ### MSE Distribution
-
-* **Mean:** 10,786.65
-* **Median:** 11,716.68
-* **Interpretation:**
   * Increase: ~14× higher than low noise
   * Bimodal distribution suggests varying error patterns
   * Extremely high error values confirm substantial pixel-level differences
 
 ### Entropy Difference
-
-* **Mean:** 1.02
-* **Median:** 0.61
-* **Interpretation:**
-  * Significant information content change
   * Wide distribution (0 to 2.0) shows variable impact
   * Higher entropy differences indicate loss of original information structure
 
 ### Noise Variance
-
-* **Mean:** 10,090.28
-* **Median:** 10,276.23
-* **Interpretation:**
   * Increase: ~13× higher than low noise
   * Broader distribution indicates less predictable noise impact
   * High variance confirms substantial signal corruption
 
 ### Sharpness
-
-* **Mean:** 184,070.10
-* **Median:** 193,454.91
-* **Interpretation:**
   * Increase: ~10× higher due to noise-induced high-frequency content
   * High values reflect noise artifacts rather than true detail
   * Distribution shows noise dominates edge detection
 
 ### Spatial Frequency
-
-* **Mean:** 191.87
-* **Median:** 197.32
-* **Interpretation:**
   * Increase: ~3× higher than low noise
   * High spatial frequency reflects dominant noise patterns
-  * Original spatial structure masked
 
 ### Dynamic Range
-
-* **Value:** 255.00
-* **Interpretation:**
   * Preserved regardless of noise level
   * Indicates salt & pepper noise fully utilizes intensity range
 
@@ -419,15 +382,15 @@ The heat map visualizes normalized performance metrics on a 0–1 scale, where:
 #### Best Parameter Performance Profile
 
 * **Strengths (green):**
-
   * PSNR (0.94)
   * SSIM (0.93)
   * Sharpness (high)
   * Noise_Variance (low)
+  * 
 * **Moderate (yellow):**
-
   * Entropy_Diff (0.42)
   * Dynamic_Range (0.75)
+  * 
 * **Trade-off Observed:**
   * Slight entropy increase in exchange for superior noise removal
 
@@ -499,75 +462,36 @@ Speckle noise is a multiplicative noise that appears as granular patterns, commo
 ### Noised Image Metric Histogram: intensity_3.0
 
 ### PSNR Distribution
-
-* **Mean:** 12.74 dB
-* **Median:** 12.93 dB
-* **Interpretation:**
-
   * Degradation of 6.3 dB from low noise (~33% reduction)
   * Normal distribution centered tightly around mean
   * Some content still recoverable at values above 10 dB
 
 ### SSIM Distribution
-
-* **Mean:** 0.45
-* **Median:** 0.48
-* **Interpretation:**
-
   * Decrease of 0.18 (≈29% reduction)
   * Bimodal distribution suggests partial structure preservation
   * Multiplicative nature preserves structure better than impulse noise
 
 ### MSE Distribution
-
-* **Mean:** 4,458.96
-* **Median:** 3,326.73
-* **Interpretation:**
-
   * Increase: ~4.3× from low noise
   * Right-skewed distribution reflects controlled degradation
 
 ### Entropy Difference
-
-* **Mean:** 0.34
-* **Median:** 0.26
-* **Interpretation:**
-
   * Minimal information structure change
   * Tightly clustered near zero
 
 ### Noise Variance
-
-* **Mean:** 4,062.41
-* **Median:** 2,952.19
-* **Interpretation:**
-
   * Increase: ~4.2× from low noise
   * Predictable variance increase due to multiplicative model
 
 ### Sharpness
-
-* **Mean:** 63,235.21
-* **Median:** 41,066.96
-* **Interpretation:**
-
   * Increase: ~3.2× compared to clean data
   * Smoother noise pattern than salt & pepper
 
 ### Spatial Frequency
-
-* **Mean:** 106.86
-* **Median:** 91.37
-* **Interpretation:**
-
   * Increase: ~1.7×
   * Wider distribution reflects gradual texture buildup
 
 ### Dynamic Range
-
-* **Value:** 255.00
-* **Interpretation:**
-
   * Maintained across all speckle intensities
   * Clipping preserves full intensity usage
 
@@ -644,17 +568,12 @@ After filtering, the image is mapped back to the original intensity domain using
 ### Low Filter Strength
 
 * **nlm_h14_t7_s21 (PSNR: 13.11 dB)**
-
   * Minimal improvement
   * Heavy residual speckle remains
-
 * **nlm_h17_t7_s21 (PSNR: 13.70 dB)**
-
   * Slight improvement
   * Still heavily corrupted
-
 **Conclusion:**
-
 * Insufficient filtering strength for intensity_3.0 speckle
 
 ### Over-Smoothing Region
@@ -667,7 +586,6 @@ After filtering, the image is mapped back to the original intensity domain using
 * **nlm_h23_t9_s31 (PSNR: 14.54 dB)**
   * Plastic-like appearance from aggressive smoothing
 **Conclusion:**
-
 * Higher h and patch sizes sacrifice natural texture for smoothness
 
 ---
@@ -812,7 +730,9 @@ The inverse Fourier Transform reconstructs the image with suppressed noise while
 
 ---
 
-#### 8.1.2 Implementation – Low-Pass Filter Method
+#### 8.1.2 Implementation 
+
+##### Low-Pass Filter Method
 
 Each image is transformed from the spatial domain into the frequency domain using the Discrete Fourier Transform. In this representation, pixel intensities are expressed as combinations of sinusoidal frequency components. High-frequency components correspond to fine detail and noise.
 
@@ -821,7 +741,6 @@ A frequency cutoff threshold is selected, and components exceeding this cutoff a
 ##### Cutoff Selection
 
 Multiple cutoffs were evaluated:
-
 * **Too low:** Excessive blurring and major detail loss
 * **Too high:** Almost no noise removal
 * **Optimal range:** 60–70 preserved structure while effectively reducing noise
