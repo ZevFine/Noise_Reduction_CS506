@@ -8,16 +8,18 @@
 
 # Index
 
-* [Section 1: Introduction](#section-1-introduction)
-* [Section 2: Pre-Noise Metrics](#section-2-pre-noise-metrics)
+* [Section 1: Introduction](#section-1--introduction)
+* [Section 2: Pre-Noise Metrics](#section-2--pre-noise-metrics)
 
   * [2.1 Approach and Methodology](#21-approach-and-methodology)
   * [2.2 Quantitative Metrics Analysis](#22-quantitative-metrics-analysis)
+
 * [Section 3: Salt & Pepper Noise Generation](#section-3-salt--pepper-noise-generation)
 
   * [3.1 Approach and Methodology](#31-approach-and-methodology)
   * [3.2 Quantitative Metrics Analysis](#32-quantitative-metrics-analysis)
   * [3.3 Denoising Goals](#33-denoising-goals)
+
 * [Section 4: Salt & Pepper Denoising – K-Medoids Clustering](#section-4-salt--pepper-denoising--k-medoids-clustering)
 
   * [4.1 Denoising Methodology](#41-denoising-methodology)
@@ -25,10 +27,12 @@
     * [4.1.1 Algorithm Selection and Rationale](#411-algorithm-selection-and-rationale)
     * [4.1.2 Implementation](#412-implementation)
     * [4.1.3 Parameter Configurations](#413-parameter-configurations)
+
   * [4.2 Results Analysis](#42-results-analysis)
 
     * [4.2.1 Visual Comparison of All Parameters](#421-visual-comparison-of-all-parameters)
     * [4.2.2 Heat Map Analysis – Metric Comparison](#422-heat-map-analysis--metric-comparison)
+
   * [4.3 Other Examples](#43-other-examples)
   * [4.4 Method Limitations and Trade-offs](#44-method-limitations-and-trade-offs)
 * [Section 5: Speckle Noise Generation](#section-5-speckle-noise-generation)
